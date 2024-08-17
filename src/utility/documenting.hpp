@@ -28,31 +28,6 @@ void write_to_file(std::string content, std::string filename, bool append = true
     }
 }
 
-std::string createPopulationReport(
-    Population<T,L>& population,
-    std::function<std::vector<L>(const std::vector<T>&)> evaluate,
-    std::function<double(const std::vector<T>&)> diversity_value,
-    std::string algorithm_name,
-    int mu, int n, int m, double OPT
-){
-
-    std::vector<T> bests = population.get_bests(false, evaluate);
-    std::vector<L> fitnesses__bests = evaluate(bests);
-
-    std::string output = algorithm_name + "\n";
-    output += "mu: " + std::to_string(mu) + " ";
-    output += "n: " + std::to_string(n) + " ";
-    output += "m: " + std::to_string(m) + "\n";
-    output += "Generations: " + std::to_string(population.get_generation()) + "\n";
-    output += "Diversity: " + std::to_string(diversity_value(population.get_genes(true))) + "\n";
-    output += "Unique individuals: " + std::to_string(population.get_size(false)) + "\n";
-    output +=  "Number of unique best individuals: " + std::to_string(bests.size()) + "\n";
-    output += "Best fitness: " + std::to_string(fitnesses__bests[0]) + "\n";
-    output += "Optimal fitness: " + std::to_string(OPT) + "\n";
-
-    return output;
-}
-
 template<typename... Args>
 std::string get_csv_line(const Args&... args) {
     std::ostringstream oss;

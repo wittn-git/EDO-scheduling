@@ -2,6 +2,8 @@ import pandas as pd
 import sys
 from icecream import *
 
+# TODO revise
+
 def format_float(value):
     try:
         return '{:.2f}'.format(float(value))

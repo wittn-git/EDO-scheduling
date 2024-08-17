@@ -76,31 +76,3 @@ std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutate_xremo
         return mutated_genes;
     };
 }
-
-/*
-    Neighbor-Swap Mutation: Swap two adjacent jobs from the same machine
-    Arguments:
-        - mutation_rate:        probability of a mutation occurring for each gene
-*/
-
-std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutate_neighborswap(double mutation_rate) {
-    return [mutation_rate](const std::vector<T>& genes, std::mt19937& generator) -> std::vector<T> {
-        std::vector<T> mutated_genes(genes.size());
-        std::uniform_real_distribution< double > distribute_rate(0, 1);
-        std::uniform_int_distribution< int > distribute_machine(0, genes[0].size() - 1 );
-        std::transform(genes.begin(), genes.end(), mutated_genes.begin(), [mutation_rate, &generator, distribute_rate, distribute_machine](const T& gene) mutable -> T {
-            T mutated_gene(gene);
-            if(distribute_rate(generator) < mutation_rate){
-                int machine;
-                do{
-                    machine = distribute_machine(generator);
-                }while(gene[machine].size() < 2);
-                std::uniform_int_distribution< int > distribute_job(0, gene[machine].size() - 2 );
-                int job = distribute_job(generator);
-                std::swap(mutated_gene[machine][job], mutated_gene[machine][job + 1]);
-            }
-            return mutated_gene;
-        });
-        return mutated_genes;
-    };
-}
