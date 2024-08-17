@@ -13,7 +13,18 @@
 using T = std::vector<std::vector<int>>;
 using L = double;
 
-Population_Mu1<T,L> mu1_constrained(
+bool check_robustness(const std::vector<T>& population, const std::tuple<int, int>& restricted_jobs){
+    for(std::vector<std::vector<int>> gene : population){
+        for(std::vector<int> machine : gene){
+            for(int i = 0; i < machine.size()-1; i++){
+                if(machine[i] == std::get<0>(restricted_jobs) && machine[i+1] == std::get<1>(restricted_jobs)) return true;
+            }
+        }
+    }
+    return false;
+}
+
+std::tuple<Population_Mu1<T,L>, bool, bool> mu1(
     int seed, 
     int m, 
     int n, 
@@ -23,7 +34,8 @@ Population_Mu1<T,L> mu1_constrained(
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutate,
     std::function<double(const T&, const T&)> diversity_measure,
     double alpha,
-    T initial_gene
+    T initial_gene,
+    std::tuple<int, int> restricted_jobs
 ){
 
     double OPT = evaluate({initial_gene})[0];
@@ -35,6 +47,10 @@ Population_Mu1<T,L> mu1_constrained(
     std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)> selectSurvivors_Div = select_div(alpha, n, OPT, diversity_measure, evaluate);
 
     Population_Mu1<T,L> population(seed, initialize, evaluate, select_parents, mutate, recombine, select_survivors, selectSurvivors_Div);
+    bool starting_robustness = check_robustness(population.get_genes(false), restricted_jobs);
+
     population.execute(termination_criterion);
-    return population;
+    bool ending_robustness = check_robustness(population.get_genes(false), restricted_jobs);
+
+    return std::make_tuple(population, starting_robustness, ending_robustness);
 }

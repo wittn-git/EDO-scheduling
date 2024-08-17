@@ -51,11 +51,20 @@ std::tuple<std::function<std::vector<L>(const std::vector<T>&)>, std::function<d
     return std::make_tuple(evaluate, diversity_measure, diversity_value);
 }
 
+std::tuple<int, int> get_restricted_jobs(int n, int seed){
+    std::mt19937 gen(seed);
+    std::uniform_int_distribution<int> dist(0, n-1);
+    int job1 = dist(gen);
+    int job2 = dist(gen);
+    while(job1 == job2) job2 = dist(gen);
+    return std::make_tuple(job1, job2);
+}
+
 // Test functions ------------------------------------------------------------------
 
 void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::string output_file, std::string operator_string, std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutation_operator){
    
-    std::string header = get_csv_line("seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation");
+    std::string header = get_csv_line("seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation,starting_robustness,ending_robustness");
     write_to_file(header, output_file, false);
     int max_processing_time = 50;
 
@@ -67,16 +76,16 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
         MachineSchedulingProblem problem = get_problem(seed, n, max_processing_time);
         auto [evaluate, diversity_measure, diversity_value] = get_eval_div_funcs(problem);
         auto [OPT, optimal_solution] = get_optimal_solution(problem, m, evaluate);
-        std::string result;
-        // TODO insert the iteration limit
-        Population<T,L> population = mu1_constrained(
+        std::tuple<int, int> restricted_jobs = get_restricted_jobs(n, seed);
+        
+        auto [population, starting_robustness, ending_robustess] = mu1(
             seed, m, n, mu,
             terminate_diversitygenerations(1, true, diversity_measure, n*n*mu), evaluate, mutation_operator, diversity_measure,
-            alpha, optimal_solution
-        );
-        // TODO insert the robustness test
-        // TODO insert the iteration limit
-        result += get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), n*n*mu, diversity_value(population.get_genes(true)), population.get_best_fitness(evaluate), OPT, operator_string);
+            alpha, optimal_solution,
+            restricted_jobs
+        ); // TODO insert the iteration limit
+
+        std::string result = get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), n*n*mu, diversity_value(population.get_genes(true)), population.get_best_fitness(evaluate), OPT, operator_string, starting_robustness, ending_robustess); // TODO insert the iteration limit
         write_to_file(result, output_file);
     };
 
