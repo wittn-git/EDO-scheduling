@@ -28,7 +28,7 @@ void loop_parameters(std::vector<int> mus, std::vector<int> ns, std::vector<int>
             for(int m : ms){
                 for(float alpha : alphas){
                     for(int run = 0; run < runs; run++){
-                        func(mu, n, m, run, alpha);
+                        func(mu, n, m, alpha, run);
                     }
                 }
             }
@@ -84,7 +84,7 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
             alpha, optimal_solution,
             restricted_jobs
         ); // TODO insert the iteration limit
-
+        std::cout << "A" << std::endl;
         std::string result = get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), n*n*mu, diversity_value(population.get_genes(true)), population.get_best_fitness(evaluate), OPT, operator_string, starting_robustness, ending_robustess); // TODO insert the iteration limit
         write_to_file(result, output_file);
     };

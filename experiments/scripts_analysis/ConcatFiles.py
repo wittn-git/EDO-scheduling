@@ -17,9 +17,8 @@ def process_files(input_folder, outputfile):
             with open(file_path, 'r') as file:
                 lines = file.readlines()
                 output.writelines(lines[1:])
-    print("Processing complete.")
 
-if(__name__ == "__main__"):
+if __name__ == "__main__":
 
     if len(sys.argv) < 3:
         print("Usage: python3 ConcatFiles.py <input_folder> <output_file_name>")
