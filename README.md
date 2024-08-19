@@ -6,13 +6,13 @@ It now serves as the source code reference and experimental data reference for t
 
 ## TODO (Revision of paper)
 
-- [] Revise the table generation
+- [X] Add the robustness experiments
 - [X] Revise the summary of the experiments
 - [X] Revise the experiment running code
+- [X] Revise the table generation
 - [] Run preliminary experiments to get an upper bound on the iterations
-- [X] Add the robustness experiments
-- [] Run the experiments
 - [] Do preliminary tests for the lambdas of XRAI
+- [] Run the experiments
 - [] Analyze the results
 - [] Write the paper
 
