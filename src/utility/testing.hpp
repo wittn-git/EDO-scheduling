@@ -22,6 +22,7 @@ bool is_viable_combination(int mu, int n, int m){
 }
 
 void loop_parameters(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::function<void(int, int, int, int, float)> func){
+    int total_runs = ns.size()*mus.size()*ms.size()*alphas.size()*runs;
     #pragma omp parallel for collapse(4)
     for(int n : ns){
         for(int mu : mus){
@@ -84,7 +85,6 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
             alpha, optimal_solution,
             restricted_jobs
         ); // TODO insert the iteration limit
-        std::cout << "A" << std::endl;
         std::string result = get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), n*n*mu, diversity_value(population.get_genes(true)), population.get_best_fitness(evaluate), OPT, operator_string, starting_robustness, ending_robustess); // TODO insert the iteration limit
         write_to_file(result, output_file);
     };

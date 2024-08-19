@@ -14,7 +14,6 @@ using T = std::vector<std::vector<int>>;
 using L = double;
 
 bool check_robustness(const std::vector<T>& population, const std::tuple<int, int>& restricted_jobs){
-    std::cout << std::get<0>(restricted_jobs) << " " << std::get<1>(restricted_jobs) << std::endl;
     for(std::vector<std::vector<int>> gene : population){
         for(std::vector<int> machine : gene){
             if (machine.size() < 2) continue;

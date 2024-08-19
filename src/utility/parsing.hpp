@@ -27,11 +27,7 @@ std::vector<list_type> parse_list(std::string input){
 using T = std::vector<std::vector<int>>;
 
 std::tuple<std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>, std::string, std::vector<int>, std::vector<int>, std::vector<int>, std::vector<double>, int, std::string> parse_arguments(int argc, char **argv){
-    // print arguments
-    for(int i = 0; i < argc; i++){
-        std::cout << argv[i] << " ";
-    }
-    std::cout << std::endl;
+    
     if(argc != 9){
         throw std::invalid_argument("Pass 8 arguments. You only passed "+ std::to_string(argc - 1) + ". (Pass '-' for unused parameters)");
     }
@@ -44,7 +40,7 @@ std::tuple<std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>, 
         mutation_operator = mutate_removeinsert(1);
     }else if(mutation_operator_name == "XRAI"){
         double lambda = std::stod(argv[8]);
-        mutation_operator_name += "_" + std::to_string(lambda);
+        mutation_operator_name = "XRAI_" + std::to_string(lambda).substr(0, std::to_string(lambda).find(".") + 3);
         mutation_operator = mutate_xremoveinsert(1, lambda);
     }else {
         throw std::invalid_argument("Invalid mutation operator.");

@@ -8,7 +8,7 @@
         - runs: int
         - mus: mu_1,mu_2,...,mu_w
         - ns: n_1,n_2,...,n_x
-        - m: m_1,m_2,...m_y
+        - ms: m_1,m_2,...m_y
         - alpha: a_1,a_2,...,a_z
         - lambda: Double (only for "XRAI", mean of the poisson distribution)
 */

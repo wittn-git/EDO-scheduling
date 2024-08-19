@@ -22,15 +22,14 @@ def generate_table(input_file : str, output_file : str):
     
     parameter_indices = {parameter: 0 for i, parameter in enumerate(parameter_columns.keys())}
     inner_columns = {
-        "diversity": "Div",
-        "starting_robustness": "$R_{init}$",
-        "ending_robustness": "$R_{final}$"
+        "diversity": "$Div$",
+        "generations": "$Gen$",
+        "max_generations": "$Gen_{max}$"
     }
     operators = df["mutation"].unique()
     operator_display_names = {
         "1RAI": "1(R+I)"
     }
-
 
     with open(output_file, "w") as f:
         f.write("\\begin{center}\n\\renewcommand{\\tabcolsep}{4pt}\n\\renewcommand{\\arraystretch}{1.1}\n") # basic table starting commands
@@ -58,10 +57,8 @@ def generate_table(input_file : str, output_file : str):
         f.write(" \\\\ \n")
             
         f.write("\\midrule\n") # line under the parameter names
-
-        # iterate the groups of the dataframe
         
-        for group_index, (key, group) in enumerate(groups):
+        for group_index, (key, group) in enumerate(groups): # iterate the groups of the dataframe
             if group_index != 0:
                 for i, column in enumerate(parameter_columns.keys()): # draw the hhline if end of the group is reached
                     if parameter_indices[column] == 0 and i != len(parameter_columns) - 1:
@@ -83,10 +80,7 @@ def generate_table(input_file : str, output_file : str):
                     if i != len(operators) - 1 or j != len(inner_columns) - 1: f.write(" & ")
             f.write(" \\\\ \n")      
 
-        #TODO finish
-
         f.write(f"\\end{{tabular}} \n \\end{{{font_name}}} \n \\end{{center}}") # basic table ending commands
-
 
 if __name__ == "__main__" :
 
