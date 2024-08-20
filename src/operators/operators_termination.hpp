@@ -18,11 +18,10 @@ using L = double;
         diversity_measure:  diversity measure to use
         max_generations:    maximum number of generations
 */
-std::function<bool(Population<T,L>&)> terminate_diversitygenerations(double threshold, bool higher, std::function<double(const T&, const T&)> diversity_measure, int max_generations){
-    std::function<double(const std::vector<T>&)> div_vector = diversity_vector(diversity_measure);
-    return [div_vector, higher, threshold, max_generations](Population<T,L>& population) -> bool {
-        if(population.get_generation() >= max_generations) return true;
-        if(div_vector(population.get_genes(true)) == threshold) return true;
-        return higher == (div_vector(population.get_genes(true)) > threshold);
+std::function<bool(Population<T,L>&)> terminate_diversitygenerations(double diversity_threshold, std::function<double(const std::vector<double>&)> diversity_measure_population, int generation_threshold){
+    return [diversity_measure_population, diversity_threshold, generation_threshold](Population<T,L>& population) -> bool {
+        if(population.get_generation() >= generation_threshold) return true;
+        if(population.get_diversity(diversity_measure_population) >= diversity_threshold) return true;
+        return false;
     };
 }

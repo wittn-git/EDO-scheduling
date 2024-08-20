@@ -45,11 +45,18 @@ std::tuple<int, T> get_optimal_solution(MachineSchedulingProblem problem, int m,
     return std::make_tuple(OPT, optimal_solution);
 }
 
-std::tuple<std::function<std::vector<L>(const std::vector<T>&)>, std::function<double(const T&, const T&)>, std::function<double(const std::vector<T>&)>> get_eval_div_funcs(MachineSchedulingProblem problem){
+std::tuple<std::function<std::vector<L>(const std::vector<T>&)>, std::function<double(const T&, const T&)>, std::function<double(const std::vector<double>&)>> get_eval_div_funcs(MachineSchedulingProblem problem, bool euclidean_norm, int mu, int n){
     std::function<std::vector<L>(const std::vector<T>&)> evaluate = evaluate_tardyjobs(problem);
-    std::function<double(const T&, const T&)> diversity_measure = diversity_DFM();
-    std::function<double(const std::vector<T>&)> diversity_value = diversity_vector(diversity_measure);
-    return std::make_tuple(evaluate, diversity_measure, diversity_value);
+    std::function<double(const T&, const T&)> diversity_measure_individual = diversity_individual_DFM();
+    std::function<double(const std::vector<double>&)> diversity_measure_population;
+    if (euclidean_norm){
+        double max_value = (n * std::sqrt((mu * mu - mu)/2));
+        diversity_measure_population = diversity_population_eucl(max_value);
+    }else{
+        double max_value = ((mu * mu - mu)/2)*n;
+        diversity_measure_population = diversity_population_sum(max_value);
+    }
+    return std::make_tuple(evaluate, diversity_measure_individual, diversity_measure_population);
 }
 
 std::tuple<int, int> get_restricted_jobs(int n, int seed){
@@ -63,29 +70,30 @@ std::tuple<int, int> get_restricted_jobs(int n, int seed){
 
 // Test functions ------------------------------------------------------------------
 
-void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::string output_file, std::string operator_string, std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutation_operator){
+void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::string output_file, std::string operator_string, std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutation_operator, bool euclidean_norm){
    
-    std::string header = get_csv_line("seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation,starting_robustness,ending_robustness");
+    std::string header = get_csv_line("seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation,starting_robustness,ending_robustness,euclidean_norm");
     write_to_file(header, output_file, false);
     int max_processing_time = 50;
 
-    auto algorithm_test = [output_file, max_processing_time, mutation_operator, operator_string](int mu, int n, int m, float alpha, int run) {
+    auto algorithm_test = [output_file, max_processing_time, mutation_operator, operator_string, euclidean_norm](int mu, int n, int m, float alpha, int run) {
 
         if(!is_viable_combination(mu, n, m)) return;
 
         int seed = generate_seed(mu, n, m, alpha, run);
         MachineSchedulingProblem problem = get_problem(seed, n, max_processing_time);
-        auto [evaluate, diversity_measure, diversity_value] = get_eval_div_funcs(problem);
+        auto [evaluate, diversity_measure_individual, diversity_measure_population] = get_eval_div_funcs(problem, euclidean_norm, mu, n);
         auto [OPT, optimal_solution] = get_optimal_solution(problem, m, evaluate);
         std::tuple<int, int> restricted_jobs = get_restricted_jobs(n, seed);
+        int max_generations = n*n*mu; // TODO insert the iteration limit
         
         auto [population, starting_robustness, ending_robustess] = mu1(
             seed, m, n, mu,
-            terminate_diversitygenerations(1, true, diversity_measure, 200*n*n*mu), evaluate, mutation_operator, diversity_measure,
+            terminate_diversitygenerations(0.75, diversity_measure_population, max_generations), evaluate, mutation_operator, diversity_measure_individual, diversity_measure_population,
             alpha, optimal_solution,
             restricted_jobs
-        ); // TODO insert the iteration limit
-        std::string result = get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), 200*n*n*mu, diversity_value(population.get_genes(true)), population.get_best_fitness(evaluate), OPT, operator_string, starting_robustness, ending_robustess); // TODO insert the iteration limit
+        ); 
+        std::string result = get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), max_generations, population.get_diversity(diversity_measure_population), population.get_best_fitness(evaluate), OPT, operator_string, starting_robustness, ending_robustess, euclidean_norm);
         write_to_file(result, output_file);
     };
 

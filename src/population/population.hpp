@@ -11,7 +11,7 @@ template <typename T>
 struct Diversity_Preserver {
     int index;
     bool first;
-    std::map<std::tuple<int, int>, double> diversity_scores;
+    std::map<std::pair<int, int>, double> diversity_scores;
     std::vector<T> genes;
 };
 
@@ -32,12 +32,11 @@ protected:
     std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, std::mt19937&)>& selectParents;
     // Function taking a vector of genes of type T and returning a vector of mutated genes of type T
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& mutate;
-    // Function taking a vector of genes of type T and returning a vector of recombined genes of type T
-    std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& recombine;
-    // Function taking two vectors of genes of type T (parents and children) and returning a selected vector of genes of type T
-    std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, const std::vector<T>&, std::mt19937&)>& selectSurvivors;
-
-    std::string gene_to_string(T gene);
+    // Function taking a vector of genes of type T, a child T and a diversity preserver and a diversity preserver
+    std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)>& selectSurvivors;
+    
+    //struct saving the diversity scores of the genes
+    Diversity_Preserver<T> div_preserver;
 
 public:
 
@@ -48,8 +47,7 @@ public:
         std::function<std::vector<L>(const std::vector<T>&)>& evaluate,
         std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, std::mt19937&)>& selectParents,
         std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& mutate,
-        std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& recombine,
-        std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, const std::vector<T>&, std::mt19937&)>& selectSurvivors
+        std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)>& selectSurvivors
     );
 
     // Default constructor for initialization purposes
@@ -71,17 +69,9 @@ public:
     int get_size(bool keep_duplicates);        
     //sets the genes in the population to new_genes                                         
     void set_genes(std::vector<T> new_genes);      
-    //returns a string representation of the population                 
-    std::string to_string(bool keep_duplicates);                         
-    //returns a string representation of the best genes in the population, using the given evaluate function
-    std::string bests_to_string(std::function<std::vector<L>(const std::vector<T>&)>& evaluate);     
-                
-    // setters of the operator functions
-    void set_evaluate(const std::function<std::vector<L>(const std::vector<T>&)>& evaluate);
-    void set_selectParents(const std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, std::mt19937&)>& selectParents);
-    void set_mutate(const std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& mutate);
-    void set_recombine(const std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& recombine);
-    void set_selectSurvivors(const std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, const std::vector<T>&, std::mt19937&)>& selectSurvivors);
+    //returns the current diversity given a diversity measure function on the population level
+    double get_diversity(std::function<double(const std::vector<double>&)> diversity_measure_population);
+
 };
 
 // Class Implementation ---------------------------------------------------------------------------------------------------------------------
@@ -93,26 +83,22 @@ Population<T, L>::Population(
     std::function<std::vector<L>(const std::vector<T>&)>& evaluate,
     std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, std::mt19937&)>& selectParents,
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& mutate,
-    std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& recombine,
-    std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, const std::vector<T>&, std::mt19937&)>& selectSurvivors
-) : generation(0), generator(seed), evaluate(evaluate), selectParents(selectParents), mutate(mutate), recombine(recombine), selectSurvivors(selectSurvivors) {
-    assert(initialize != nullptr && evaluate != nullptr && "initialize and evaluate function must be set");
+    std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)>& selectSurvivors
+) : generation(0), generator(seed), evaluate(evaluate), selectParents(selectParents), mutate(mutate), selectSurvivors(selectSurvivors) {
     genes = initialize(generator);
     assert(genes.size() > 0 && "initialize function must return a non-empty vector");
+    div_preserver = Diversity_Preserver<T>{0, true, std::map<std::pair<int, int>, double>(), genes};
+    div_preserver = selectSurvivors(genes, genes[0], div_preserver, generator);
 }
-
-template <typename T, typename L>
-Population<T, L>::Population(){};
 
 template <typename T, typename L>
 void Population<T, L>::execute() {
     generation++;
-    std::vector<L> fitnesses = (evaluate == nullptr) ? std::vector<L>(0) : evaluate(genes);
-    assert(evaluate == nullptr || fitnesses.size() == genes.size());
-    std::vector<T> parents = (selectParents == nullptr) ? genes : selectParents(genes, fitnesses, generator);
-    std::vector<T> children = (recombine == nullptr) ? parents : recombine(parents, generator);
-    children = (mutate == nullptr) ? children : mutate(children, generator);
-    genes = (selectSurvivors == nullptr) ? children : selectSurvivors(genes, fitnesses, children, generator);
+    std::vector<L> fitnesses = evaluate(genes);
+    std::vector<T> parents = selectParents(genes, fitnesses, generator);
+    std::vector<T> children = mutate(parents, generator);
+    div_preserver = selectSurvivors(genes, children[0], div_preserver, generator);
+    genes = div_preserver.genes;
 }
 
 template <typename T, typename L>
@@ -150,7 +136,7 @@ L Population<T, L>::get_best_fitness(std::function<std::vector<L>(const std::vec
 template <typename T, typename L>
 std::vector<T> Population<T, L>::get_genes(bool keep_duplicats){
     if(keep_duplicats) return genes;
-    std::vector<T> genes_copy = this->genes;
+    std::vector<T> genes_copy = genes;
     std::sort(genes_copy.begin(), genes_copy.end());
     genes_copy.erase(std::unique(genes_copy.begin(), genes_copy.end()), genes_copy.end());
     return genes_copy;
@@ -172,49 +158,14 @@ void Population<T, L>::set_genes(std::vector<T> new_genes){
 }
 
 template <typename T, typename L>
-std::string Population<T, L>::gene_to_string(T gene){
-    std::string s;
-    int machine = 1;
-    for (auto chromosome : gene) {
-        s += std::to_string(machine) + ": ";
-        for(auto job : chromosome){
-            s += std::to_string(job) + " ";
+double Population<T, L>::get_diversity(std::function<double(const std::vector<double>&)> diversity_measure_population){
+    std::vector<double> diversity_scores;
+    diversity_scores.reserve(div_preserver.diversity_scores.size()); 
+    for (const auto& entry : div_preserver.diversity_scores) {
+        const auto& indices = entry.first;
+        if (indices.first != div_preserver.index && indices.second != div_preserver.index) {
+            diversity_scores.push_back(entry.second);
         }
-        s += "\n";
-        machine++;
     }
-    s += "\n";
-    return s;
+    return diversity_measure_population(diversity_scores);
 }
-
-template <typename T, typename L>
-std::string Population<T, L>::to_string(bool keep_duplicates){
-    std::string s;
-    for (auto gene : get_genes(keep_duplicates)) {
-        s += gene_to_string(gene);
-    }
-    return s;
-}
-
-template <typename T, typename L>
-std::string Population<T, L>::bests_to_string(std::function<std::vector<L>(const std::vector<T>&)>& evaluate){
-    std::string s;
-    std::vector<T> bests = get_bests(false, evaluate);
-    std::vector<L> fitnesses = evaluate(bests);
-    for (int i = 0; i < bests.size(); i++) {
-        s += "Fitness: " + std::to_string(fitnesses[i]) + "\n";
-        s += gene_to_string(bests[i]);
-    }
-    return s;
-}
-
-template <typename T, typename L>
-void Population<T, L>::set_evaluate(const std::function<std::vector<L>(const std::vector<T>&)>& evaluate){ this->evaluate = evaluate;}
-template <typename T, typename L>
-void Population<T, L>::set_selectParents(const std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, std::mt19937&)>& selectParents){ this->selectParents = selectParents;}
-template <typename T, typename L>
-void Population<T, L>::set_mutate(const std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& mutate){ this->mutate = mutate;}
-template <typename T, typename L>
-void Population<T, L>::set_recombine(const std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& recombine){ this->recombine = recombine;}
-template <typename T, typename L>
-void Population<T, L>::set_selectSurvivors(const std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, const std::vector<T>&, std::mt19937&)>& selectSurvivors){ this->selectSurvivors = selectSurvivors;}

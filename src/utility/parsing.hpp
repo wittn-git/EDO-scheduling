@@ -26,31 +26,33 @@ std::vector<list_type> parse_list(std::string input){
 
 using T = std::vector<std::vector<int>>;
 
-std::tuple<std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>, std::string, std::vector<int>, std::vector<int>, std::vector<int>, std::vector<double>, int, std::string> parse_arguments(int argc, char **argv){
+auto parse_arguments(int argc, char **argv){
     
-    if(argc != 9){
-        throw std::invalid_argument("Pass 8 arguments. You only passed "+ std::to_string(argc - 1) + ". (Pass '-' for unused parameters)");
+    if(argc != 10){
+        throw std::invalid_argument("Pass 9 arguments. You only passed "+ std::to_string(argc - 1) + ". (Pass '-' for unused parameters)");
     }
 
     std::string output_file = std::string(argv[1]);
 
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutation_operator;
-    std::string mutation_operator_name(argv[2]);    
-    if(mutation_operator_name == "1RAI"){
+    std::string operator_string(argv[2]);    
+    if(operator_string == "1RAI"){
         mutation_operator = mutate_removeinsert(1);
-    }else if(mutation_operator_name == "XRAI"){
-        double lambda = std::stod(argv[8]);
-        mutation_operator_name = "XRAI_" + std::to_string(lambda).substr(0, std::to_string(lambda).find(".") + 3);
+    }else if(operator_string == "XRAI"){
+        double lambda = std::stod(argv[9]);
+        operator_string = "XRAI_" + std::to_string(lambda).substr(0, std::to_string(lambda).find(".") + 3);
         mutation_operator = mutate_xremoveinsert(1, lambda);
     }else {
         throw std::invalid_argument("Invalid mutation operator.");
     }
 
-    int runs = std::stoi(argv[3]);
-    std::vector<int> mus = parse_list<int>(argv[4]);
-    std::vector<int> ns = parse_list<int>(argv[5]);
-    std::vector<int> ms = parse_list<int>(argv[6]);
-    std::vector<double> alphas = parse_list<double>(argv[7]);
+    bool euclidean_norm = std::stoi(argv[3]);
+
+    int runs = std::stoi(argv[4]);
+    std::vector<int> mus = parse_list<int>(argv[5]);
+    std::vector<int> ns = parse_list<int>(argv[6]);
+    std::vector<int> ms = parse_list<int>(argv[7]);
+    std::vector<double> alphas = parse_list<double>(argv[8]);
     
-    return std::make_tuple(mutation_operator, output_file, mus, ns, ms, alphas, runs, mutation_operator_name);
+    return std::make_tuple(output_file, mutation_operator, operator_string, euclidean_norm, runs, mus, ns, ms, alphas);
 }
