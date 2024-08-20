@@ -81,11 +81,11 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
         
         auto [population, starting_robustness, ending_robustess] = mu1(
             seed, m, n, mu,
-            terminate_diversitygenerations(1, true, diversity_measure, n*n*mu), evaluate, mutation_operator, diversity_measure,
+            terminate_diversitygenerations(1, true, diversity_measure, 200*n*n*mu), evaluate, mutation_operator, diversity_measure,
             alpha, optimal_solution,
             restricted_jobs
         ); // TODO insert the iteration limit
-        std::string result = get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), n*n*mu, diversity_value(population.get_genes(true)), population.get_best_fitness(evaluate), OPT, operator_string, starting_robustness, ending_robustess); // TODO insert the iteration limit
+        std::string result = get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), 200*n*n*mu, diversity_value(population.get_genes(true)), population.get_best_fitness(evaluate), OPT, operator_string, starting_robustness, ending_robustess); // TODO insert the iteration limit
         write_to_file(result, output_file);
     };
 

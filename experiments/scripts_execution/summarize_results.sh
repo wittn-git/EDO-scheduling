@@ -4,3 +4,6 @@ python3 ../scripts_analysis/SummarizeRuns.py ../data/aggregated/concatenated.csv
 
 mkdir -p ../data/tables
 python3 ../scripts_analysis/GenerateTables.py ../data/aggregated/aggregated.csv ../data/tables/table.tex
+
+mkdir -p ../data/plots
+python3 ../scripts_analysis/PlotRuntimes.py ../data/aggregated/aggregated.csv ../data/plots

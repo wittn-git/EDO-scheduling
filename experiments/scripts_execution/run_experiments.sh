@@ -1,13 +1,12 @@
 #!/bin/bash
 
 operators=("XRAI" "1RAI")
-lambdas=("0.1" "0.2" "0.5" "1" "2")
-mus="2,3,5"
-ns="5,7,10"
-ms="1,3"
-runs="30"
+lambdas=("0.1" "0.2")
+mus="2,5,10,20,25"
+ns="5,10,20,50"
+ms="1,3,5"
+runs="20"
 alphas="0.3,0.6,1"
-
 # TODO substitute lambdas
 
 output_path="../experiments/data/runs"

@@ -24,18 +24,15 @@ std::function<double(const T& , const T&)> diversity_DFM(){
     return [](const T& gene1, const T& gene2) -> double {
         int common_DFS = 0;
         for (const auto& machine1 : gene1) {
-            int machine1_size = machine1.size();
-            if (machine1_size < 2) continue;
             for (const auto& machine2 : gene2) {
-                int machine2_size = machine2.size();
-                if (machine2_size < 2) continue;
-                for(int i = 0; i < machine1_size - 1; i++){
-                    for(int j = 0; j < machine2_size - 1; j++){
+                for(int i = 0; i < machine1.size() - 1; i++){
+                    for(int j = 0; j < machine2.size() - 1; j++){
                         if(machine1[i] == machine2[j] && machine1[i+1] == machine2[j+1]){
                             common_DFS++;
                         }
                     }
                 }
+                if (machine1.back() == machine2.back()) common_DFS++;
             }
         }
         return common_DFS;
@@ -57,12 +54,12 @@ std::function<double(const std::vector<T>&)> diversity_vector(std::function<doub
                 diversity_scores.emplace_back(diversity_measure(genes[i], genes[j]));
             }
         }
-        return 1 - (euclideanNorm(diversity_scores) / ((n-1) * std::sqrt((mu * mu - mu)/2)));
+        return 1 - (euclideanNorm(diversity_scores) / (n * std::sqrt((mu * mu - mu)/2)));
     };
 }
 
 std::function<double(const std::vector<double>&)> diversity_vector(int n, int m, int mu){
     return [n, m, mu](const std::vector<double>& diversity_scores) -> double {
-        return 1 - (euclideanNorm(diversity_scores) / ((n-1) * std::sqrt((mu * mu - mu)/2)));
+        return 1 - (euclideanNorm(diversity_scores) / (n * std::sqrt((mu * mu - mu)/2)));
     };
 }
