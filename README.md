@@ -10,12 +10,18 @@ It now serves as the source code reference and experimental data reference for t
 - [X] Revise the summary of the experiments
 - [X] Revise the experiment running code
 - [X] Revise the table generation
-- [] Alter DFM definition
-- [] Run preliminary experiments to get an upper bound on the iterations -> Do we want that? Showing that the euclidean norm is superior only works if the diversity is not maximized
+- [X] Alter DFM definition
+- [X] Table Format
+- [] Add stepwise diversity dependent logging in experiments
+- [] Determine maximum generations
+- [] Reformulate the DFM diversity measure
+- [] Check if proof is possible for general metrics
+- [] Change proof to: normalized, length optimized, general metric (if possible)
+- [] Change paper structure in overleaf
 - [] Do preliminary tests for the lambdas of XRAI
 - [] Run the experiments
 - [] Analyze the results
-- [] Write the paper (Proof: Do we want the unnormalized diversity measure for simplicity in the proof or the normalized one for constistency with the experiments?)
+- [] Write the paper
 
 ### Neccessary Latex packages for tables
 \usepackage{array}

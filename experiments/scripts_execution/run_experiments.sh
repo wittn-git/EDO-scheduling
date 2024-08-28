@@ -1,7 +1,7 @@
 #!/bin/bash
 
 lambdas=() # TODO insert lambdas
-mus="2,5,10,20,25"
+mus="2,5,10,25"
 ns="5,10,20,50"
 ms="1,3,5"
 runs="30"
