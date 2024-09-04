@@ -16,3 +16,9 @@ endif()
 
 target_compile_features(EDO_scheduling PUBLIC cxx_std_17)
 target_include_directories(EDO_scheduling PRIVATE include)
+
+# uncomment the following lines to enable optimization, comment them when developing
+target_compile_options(EDO_scheduling PRIVATE
+    -O3
+    -march=native
+)

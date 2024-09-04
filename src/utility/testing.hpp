@@ -95,7 +95,6 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
         );
 
         for(double threshold : div_thresholds){
-            std::cout << threshold << std::endl;
             auto [starting_robustness, ending_robustness] = run_mu1(
                 population,
                 terminate_diversitygenerations(threshold, diversity_measure_population, max_generations),

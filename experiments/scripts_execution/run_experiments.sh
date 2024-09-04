@@ -17,7 +17,7 @@ chmod +x ./run.sh
 euclidean_norm=("0" "1")
 for euclidean_norm in "${euclidean_norm[@]}"; do
     for lambda in "${lambdas[@]}"; do
-        ./run.sh "$output_path/XRAI_$lambda_$euclidean_norm.csv" "XRAI" $euclidean_norm $runs $mus $ns $ms $alphas $lambda 
+        ./run.sh "$output_path/XRAI-$lambda-$euclidean_norm.csv" "XRAI" $euclidean_norm $runs $mus $ns $ms $alphas $lambda 
     done
-    ./run.sh "$output_path/1RAI_$euclidean_norm.csv" "1RAI" $euclidean_norm $runs $mus $ns $ms $alphas "-" 
+    ./run.sh "$output_path/1RAI-$euclidean_norm.csv" "1RAI" $euclidean_norm $runs $mus $ns $ms $alphas "-" 
 done

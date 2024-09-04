@@ -24,7 +24,9 @@ std::function<double(const T& , const T&)> diversity_individual_DFM(){
     return [](const T& gene1, const T& gene2) -> double {
         int common_DFS = 0;
         for (const auto& machine1 : gene1) {
+            if (machine1.size() == 0) continue;
             for (const auto& machine2 : gene2) {
+                if (machine2.size() == 0) continue;
                 for(int i = 0; i < machine1.size() - 1; i++){
                     for(int j = 0; j < machine2.size() - 1; j++){
                         if(machine1[i] == machine2[j] && machine1[i+1] == machine2[j+1]){
