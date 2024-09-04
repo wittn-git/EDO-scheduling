@@ -13,7 +13,7 @@ It now serves as the source code reference and experimental data reference for t
 - [X] Alter DFM definition
 - [X] Set table format
 - [X] Change proof to: normalized, length optimized
-- [] Add stepwise diversity dependent logging in experiments
+- [X] Add stepwise diversity dependent logging in experiments
 - [] Change paper structure in overleaf
 - [] Do preliminary tests for the lambdas of XRAI
 - [] Run the experiments

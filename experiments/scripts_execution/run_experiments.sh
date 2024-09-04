@@ -1,11 +1,14 @@
 #!/bin/bash
 
-lambdas=() # TODO insert lambdas
-mus="2,5,10,25"
-ns="5,10,20,50"
-ms="1,3,5"
-runs="30"
+# preliminary experiments for lambdas
+lambdas=("0" "0.1" "0.15" "0.2" "0.4" "0.75" "1" "1.2" "1.5" "2" "2.5" "3")
+mus="2,3,5,8"
+ns="5,7,10"
+ms="1,3"
+runs="10"
 alphas="0.3,0.6,1"
+
+# actual experiments
 
 output_path="../experiments/data/runs"
 
