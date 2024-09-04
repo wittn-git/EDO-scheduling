@@ -7,7 +7,7 @@ import pandas as pd
 def summarize_runs(input_file : str, output_file : str):
     df = pd.read_csv(input_file)
     df = df.drop(columns=['seed', 'run'])
-    df = df.groupby(['mu', 'n', 'm', 'alpha', 'mutation']).agg({'generations': 'mean', 'max_generations': 'mean', 'diversity': 'mean', 'fitness': 'mean', 'opt': 'mean', 'starting_robustness': 'mean', 'ending_robustness': 'mean'}).reset_index()
+    df = df.groupby(['mu', 'n', 'm', 'alpha', 'mutation', 'div_threshold', 'euclidean_norm']).agg({'generations': 'mean', 'max_generations': 'mean', 'diversity': 'mean', 'fitness': 'mean', 'opt': 'mean', 'starting_robustness': 'mean', 'ending_robustness': 'mean'}).reset_index()
     df.to_csv(output_file, index=False)
 
 if __name__ == "__main__":
