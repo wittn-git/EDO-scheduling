@@ -68,15 +68,16 @@ std::tuple<int, int> get_restricted_jobs(int n, int seed){
     return std::make_tuple(job1, job2);
 }
 
-// Test functions ------------------------------------------------------------------
+// Test function ------------------------------------------------------------------
 
 void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::string output_file, std::string operator_string, std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutation_operator, bool euclidean_norm){
    
-    std::string header = get_csv_line("seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation,starting_robustness,ending_robustness,euclidean_norm");
+    std::string header = get_csv_line("seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation,starting_robustness,ending_robustness,euclidean_norm,div_threshold");
     write_to_file(header, output_file, false);
     int max_processing_time = 50;
+    std::vector<double> div_thresholds = {0.25, 0.5, 0.75, 0.85, 1};
 
-    auto algorithm_test = [output_file, max_processing_time, mutation_operator, operator_string, euclidean_norm](int mu, int n, int m, float alpha, int run) {
+    auto algorithm_test = [output_file, max_processing_time, mutation_operator, operator_string, euclidean_norm, div_thresholds](int mu, int n, int m, float alpha, int run) {
 
         if(!is_viable_combination(mu, n, m)) return;
 
@@ -85,16 +86,25 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
         auto [evaluate, diversity_measure_individual, diversity_measure_population] = get_eval_div_funcs(problem, euclidean_norm, mu, n);
         auto [OPT, optimal_solution] = get_optimal_solution(problem, m, evaluate);
         std::tuple<int, int> restricted_jobs = get_restricted_jobs(n, seed);
-        int max_generations = n*n*mu; // TODO insert the iteration limit
+        int max_generations = n*n*mu*mu;
         
-        auto [population, starting_robustness, ending_robustess] = mu1(
-            seed, m, n, mu,
-            terminate_diversitygenerations(0.75, diversity_measure_population, max_generations), evaluate, mutation_operator, diversity_measure_individual, diversity_measure_population,
-            alpha, optimal_solution,
-            restricted_jobs
-        ); 
-        std::string result = get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), max_generations, population.get_diversity(diversity_measure_population), population.get_best_fitness(evaluate), OPT, operator_string, starting_robustness, ending_robustess, euclidean_norm);
-        write_to_file(result, output_file);
+        auto population = create_population(
+            seed, m, n, mu, 
+            evaluate, mutation_operator, diversity_measure_individual, diversity_measure_population,
+            alpha, optimal_solution
+        );
+
+        for(double threshold : div_thresholds){
+            std::cout << threshold << std::endl;
+            auto [starting_robustness, ending_robustness] = run_mu1(
+                population,
+                terminate_diversitygenerations(threshold, diversity_measure_population, max_generations),
+                restricted_jobs
+            );
+            std::string result = get_csv_line(seed, mu, n, m, alpha, run, population.get_generation(), max_generations, population.get_diversity(diversity_measure_population), population.get_best_fitness(evaluate), OPT, operator_string, starting_robustness, ending_robustness, euclidean_norm, threshold);
+            write_to_file(result, output_file);
+        }
+
     };
 
     loop_parameters(mus, ns, ms, alphas, runs, algorithm_test);
