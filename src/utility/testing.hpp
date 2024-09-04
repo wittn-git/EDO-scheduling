@@ -23,7 +23,7 @@ bool is_viable_combination(int mu, int n, int m){
 
 void loop_parameters(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::function<void(int, int, int, int, float)> func){
     int total_runs = ns.size()*mus.size()*ms.size()*alphas.size()*runs;
-    #pragma omp parallel for collapse(4)
+    #pragma omp parallel for collapse(5)
     for(int n : ns){
         for(int mu : mus){
             for(int m : ms){
