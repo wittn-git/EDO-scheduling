@@ -11,16 +11,14 @@ It now serves as the source code reference and experimental data reference for t
 - [X] Revise the experiment running code
 - [X] Revise the table generation
 - [X] Alter DFM definition
-- [X] Table Format
+- [X] Set table format
+- [X] Change proof to: normalized, length optimized
 - [] Add stepwise diversity dependent logging in experiments
-- [] Determine maximum generations
-- [] Reformulate the DFM diversity measure
-- [] Check if proof is possible for general metrics
-- [] Change proof to: normalized, length optimized, general metric (if possible)
 - [] Change paper structure in overleaf
 - [] Do preliminary tests for the lambdas of XRAI
 - [] Run the experiments
 - [] Analyze the results
+- [] Check if proof is possible for general metrics <- Missing step
 - [] Write the paper
 
 ### Neccessary Latex packages for tables

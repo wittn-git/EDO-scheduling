@@ -26,10 +26,8 @@ protected:
     std::mt19937 generator;
     int generation;
 
-    // Function taking a vector of genes of type T and returning its fitness value vector of type L
-    std::function<std::vector<L>(const std::vector<T>&)>& evaluate;
     // Function taking a vector of genes of type T and returning a vector of parents of type T
-    std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, std::mt19937&)>& selectParents;
+    std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& selectParents;
     // Function taking a vector of genes of type T and returning a vector of mutated genes of type T
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& mutate;
     // Function taking a vector of genes of type T, a child T and a diversity preserver and a diversity preserver
@@ -44,8 +42,7 @@ public:
     Population(
         int seed,
         std::function<std::vector<T>(std::mt19937&)>& initialize,
-        std::function<std::vector<L>(const std::vector<T>&)>& evaluate,
-        std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, std::mt19937&)>& selectParents,
+        std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& selectParents,
         std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& mutate,
         std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)>& selectSurvivors
     );
@@ -80,11 +77,10 @@ template <typename T, typename L>
 Population<T, L>::Population(
     int seed,
     std::function<std::vector<T>(std::mt19937&)>& initialize,
-    std::function<std::vector<L>(const std::vector<T>&)>& evaluate,
-    std::function<std::vector<T>(const std::vector<T>&, const std::vector<L>&, std::mt19937&)>& selectParents,
+    std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& selectParents,
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)>& mutate,
     std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)>& selectSurvivors
-) : generation(0), generator(seed), evaluate(evaluate), selectParents(selectParents), mutate(mutate), selectSurvivors(selectSurvivors) {
+) : generation(0), generator(seed), selectParents(selectParents), mutate(mutate), selectSurvivors(selectSurvivors) {
     genes = initialize(generator);
     assert(genes.size() > 0 && "initialize function must return a non-empty vector");
     div_preserver = Diversity_Preserver<T>{0, true, std::map<std::pair<int, int>, double>(), genes};
@@ -94,8 +90,7 @@ Population<T, L>::Population(
 template <typename T, typename L>
 void Population<T, L>::execute() {
     generation++;
-    std::vector<L> fitnesses = evaluate(genes);
-    std::vector<T> parents = selectParents(genes, fitnesses, generator);
+    std::vector<T> parents = selectParents(genes, generator);
     std::vector<T> children = mutate(parents, generator);
     div_preserver = selectSurvivors(genes, children[0], div_preserver, generator);
     genes = div_preserver.genes;
@@ -106,24 +101,6 @@ void Population<T, L>::execute(std::function<bool(Population<T,L>&)> termination
     while(!termination_criterion(*this)){
         execute();
     }
-}
-
-template <typename T, typename L>
-std::vector<T> Population<T, L>::get_bests(bool keep_duplicats, std::function<std::vector<L>(const std::vector<T>&)>& evaluate){
-    std::vector<T> bests;
-    std::vector<L> fitnesses = evaluate(genes);
-    auto min_it = std::min_element(fitnesses.begin(), fitnesses.end());
-    for(int i = 0; i < genes.size(); i++){
-        if(fitnesses[i] == *min_it){
-            bests.emplace_back(genes[i]);
-        }
-    }
-    if(keep_duplicats){
-        return bests;
-    }
-    std::sort(bests.begin(), bests.end());
-    bests.erase(std::unique(bests.begin(), bests.end()), bests.end());
-    return bests;
 }
 
 template <typename T, typename L>
