@@ -14,8 +14,8 @@ It now serves as the source code reference and experimental data reference for t
 - [X] Set table format
 - [X] Change proof to: normalized, length optimized
 - [X] Add stepwise diversity dependent logging in experiments
+- [X] Do preliminary tests for the lambdas of XRAI
 - [] Change paper structure in overleaf
-- [] Do preliminary tests for the lambdas of XRAI
 - [] Run the experiments
 - [] Analyze the results
 - [] Check if proof is possible for general metrics <- Missing step
