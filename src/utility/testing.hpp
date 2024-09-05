@@ -83,7 +83,7 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
         if(!is_viable_combination(mu, n, m)) return;
 
         int seed = generate_seed(mu, n, m, alpha, run);
-        MachineSchedulingProblem problem = get_problem(seed, n, max_processing_time);
+        MachineSchedulingProblem problem = get_problem(seed, n, m, max_processing_time);
         auto [evaluate, diversity_measure_individual, diversity_measure_population] = get_eval_div_funcs(problem, diversity_string, mu, n);
         auto [OPT, optimal_solution] = get_optimal_solution(problem, m, evaluate);
         std::tuple<int, int> restricted_jobs = get_restricted_jobs(n, seed);

@@ -19,10 +19,10 @@ std::vector<int> get_processing_times(int seed, int n, int max){
     return processing_times;
 }
 
-std::vector<int> get_due_dates(int seed, std::vector<int> processing_times){
+std::vector<int> get_due_dates(int seed, int m, std::vector<int> processing_times){
     std::vector<int> due_dates(processing_times.size());
     std::mt19937 generator(seed);
-    std::uniform_real_distribution<double> dist_factor(3, 10);
+    std::uniform_real_distribution<double> dist_factor(3 / m, 10 / m);
     for(int i = 0; i < processing_times.size(); i++){
         double factor = dist_factor(generator);
         double muh = factor * processing_times[i];
@@ -38,8 +38,8 @@ std::vector<int> get_due_dates(int seed, std::vector<int> processing_times){
     return due_dates;
 }
 
-MachineSchedulingProblem get_problem(int seed, int n, int max_processing_time) {
+MachineSchedulingProblem get_problem(int seed, int n, int m, int max_processing_time) {
     std::vector<int> processing_times = get_processing_times(seed, n, max_processing_time);
-    std::vector<int> due_dates = get_due_dates(seed, processing_times);
+    std::vector<int> due_dates = get_due_dates(seed, m, processing_times);
     return {processing_times, due_dates};
 }
