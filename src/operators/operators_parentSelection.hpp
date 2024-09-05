@@ -6,7 +6,7 @@
 #include <assert.h>
 
 using T = std::vector<std::vector<int>>;
-using L = double;
+using L = int;
 
 /*
     Random Parent Selection: Select subgroup of specified size randomly

@@ -9,7 +9,7 @@
 #include "../operators/operators_termination.hpp"
 
 using T = std::vector<std::vector<int>>;
-using L = double;
+using L = int;
 
 bool check_robustness(const std::vector<T>& genes, const std::tuple<int, int>& restricted_jobs){
     for(std::vector<std::vector<int>> gene : genes){
@@ -31,7 +31,7 @@ Population<T,L> create_population(
     std::function<std::vector<L>(const std::vector<T>&)> evaluate,
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutate,
     std::function<double(const T&, const T&)> diversity_measure_individual,
-    std::function<double(const std::vector<double>&)> diversity_measure_population,
+    std::function<double(const std::vector<int>&)> diversity_measure_population,
     double alpha,
     T initial_gene
 ){

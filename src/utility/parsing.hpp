@@ -35,18 +35,18 @@ auto parse_arguments(int argc, char **argv){
     std::string output_file = std::string(argv[1]);
 
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutation_operator;
-    std::string operator_string(argv[2]);    
-    if(operator_string == "1RAI"){
+    std::string mutation_string(argv[2]);    
+    if(mutation_string == "1RAI"){
         mutation_operator = mutate_removeinsert(1);
-    }else if(operator_string == "XRAI"){
+    }else if(mutation_string == "XRAI"){
         double lambda = std::stod(argv[9]);
-        operator_string = "XRAI_" + std::to_string(lambda).substr(0, std::to_string(lambda).find(".") + 3);
+        mutation_string = "XRAI_" + std::to_string(lambda).substr(0, std::to_string(lambda).find(".") + 3);
         mutation_operator = mutate_xremoveinsert(1, lambda);
     }else {
         throw std::invalid_argument("Invalid mutation operator.");
     }
 
-    bool euclidean_norm = std::stoi(argv[3]);
+    std::string diversity_string(argv[3]);
 
     int runs = std::stoi(argv[4]);
     std::vector<int> mus = parse_list<int>(argv[5]);
@@ -54,5 +54,5 @@ auto parse_arguments(int argc, char **argv){
     std::vector<int> ms = parse_list<int>(argv[7]);
     std::vector<double> alphas = parse_list<double>(argv[8]);
     
-    return std::make_tuple(output_file, mutation_operator, operator_string, euclidean_norm, runs, mus, ns, ms, alphas);
+    return std::make_tuple(output_file, mutation_operator, mutation_string, diversity_string, runs, mus, ns, ms, alphas);
 }

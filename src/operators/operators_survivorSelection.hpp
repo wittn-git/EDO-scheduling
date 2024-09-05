@@ -12,7 +12,7 @@
 #include "../population/population.hpp"
 
 using T = std::vector<std::vector<int>>;
-using L = double;
+using L = int;
 
 // Survivor selection operators ----------------------------------------------------
 
@@ -22,7 +22,7 @@ using L = double;
         - diversity_measure:    function taking two genes and returning a double representing the diversity
 */
 
-std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)> select_div(std::function<double(const T&, const T&)> diversity_measure_individual, std::function<double(const std::vector<double>&)> diversity_measure_population) {
+std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)> select_div(std::function<double(const T&, const T&)> diversity_measure_individual, std::function<double(const std::vector<int>&)> diversity_measure_population) {
     return [diversity_measure_individual, diversity_measure_population](const std::vector<T>& parents, const T& offspring, const Diversity_Preserver<T>& diversity_preserver, std::mt19937& generator) -> Diversity_Preserver<T> {
         std::vector<T> selected_genes = parents;
         selected_genes.emplace(selected_genes.begin() + diversity_preserver.index, offspring);
@@ -51,7 +51,7 @@ std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Dive
         std::vector<double> diversity_values;
         diversity_values.reserve(indices.size());
         for (const auto& index : indices) {
-            std::vector<double> div_vector;
+            std::vector<int> div_vector;
             div_vector.reserve(indices.size());
             auto isIndexExcluded = [&index](const auto& entry) {
                 const auto& [firstIndex, secondIndex] = entry.first;
@@ -81,7 +81,7 @@ std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Dive
         - diversity_measure:    function taking two genes and returning a double representing the diversity
         - evaluate:             function taking a vector of genes and returning a vector of fitnesses
 */
-std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)> select_div(double alpha, int n, double OPT, std::function<double(const T&, const T&)> diversity_measure_individual, std::function<double(const std::vector<double>&)> diversity_measure_population, std::function<std::vector<L>(const std::vector<T>&)> evaluate) {
+std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)> select_div(double alpha, int n, double OPT, std::function<double(const T&, const T&)> diversity_measure_individual, std::function<double(const std::vector<int>&)> diversity_measure_population, std::function<std::vector<L>(const std::vector<T>&)> evaluate) {
     return [alpha, n, OPT, diversity_measure_individual, diversity_measure_population, evaluate](const std::vector<T>& parents, const T& offspring, const Diversity_Preserver<T>& diversity_preserver, std::mt19937& generator) -> Diversity_Preserver<T> {
         if(evaluate({offspring})[0] > alpha * ( n - OPT ) + OPT) return diversity_preserver;
         std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)> div = select_div(diversity_measure_individual, diversity_measure_population);

@@ -26,7 +26,6 @@ protected:
     std::mt19937 generator;
     int generation;
 
-    // Change from reference to object
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> selectParents;
     std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutate;
     std::function<Diversity_Preserver<T>(const std::vector<T>&, const T&, const Diversity_Preserver<T>&, std::mt19937&)> selectSurvivors;
@@ -51,7 +50,8 @@ public:
     int get_generation();
     int get_size(bool keep_duplicates);        
     void set_genes(std::vector<T> new_genes);      
-    double get_diversity(std::function<double(const std::vector<double>&)> diversity_measure_population);
+    double get_diversity(std::function<double(const std::vector<int>&)> diversity_measure_population);
+    void print_population();
 
 };
 
@@ -119,8 +119,8 @@ void Population<T, L>::set_genes(std::vector<T> new_genes){
 }
 
 template <typename T, typename L>
-double Population<T, L>::get_diversity(std::function<double(const std::vector<double>&)> diversity_measure_population){
-    std::vector<double> diversity_scores;
+double Population<T, L>::get_diversity(std::function<double(const std::vector<int>&)> diversity_measure_population){
+    std::vector<int> diversity_scores;
     diversity_scores.reserve(div_preserver.diversity_scores.size()); 
     for (const auto& entry : div_preserver.diversity_scores) {
         const auto& indices = entry.first;

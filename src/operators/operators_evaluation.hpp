@@ -6,7 +6,7 @@
 #include "../utility/generating.hpp"
 
 using T = std::vector<std::vector<int>>;
-using L = double;
+using L = int;
 
 // Evaluation Operators -------------------------------------------------------------
 

@@ -5,13 +5,14 @@
 #include <limits>
 #include <vector>
 #include <functional>
+#include <iostream>
 
 using T = std::vector<std::vector<int>>;
-using L = double;
+using L = int;
 
 // Utility ---------------------------------------------------------------------------
 
-double euclideanNorm(const std::vector<double>& vec) {
+double euclideanNorm(const std::vector<int>& vec) {
     double sumOfSquares = 0.0;
     for (const double& num : vec)
         sumOfSquares += num * num;
@@ -43,15 +44,29 @@ std::function<double(const T& , const T&)> diversity_individual_DFM(){
 
 // Diversity measure operators (population level) --------------------------------------
 
-std::function<double(const std::vector<double>&)> diversity_population_sum(double max_value){
-    return [max_value](const std::vector<double>& diversity_scores) -> double {
+std::function<double(const std::vector<int>&)> diversity_population_sum(double max_value){
+    return [max_value](const std::vector<int>& diversity_scores) -> double {
         double summed_entries = std::accumulate(diversity_scores.begin(), diversity_scores.end(), 0.0);
         return 1 - (summed_entries / max_value);
     };
 }
 
-std::function<double(const std::vector<double>&)> diversity_population_eucl(double max_value){
-    return [max_value](const std::vector<double>& diversity_scores) -> double {
+std::function<double(const std::vector<int>&)> diversity_population_eucl(double max_value){
+    return [max_value](const std::vector<int>& diversity_scores) -> double {
         return 1 - (euclideanNorm(diversity_scores) / max_value);
+    };
+}
+
+std::function<double(const std::vector<int>&)> diversity_population_ord(int vector_length, int max_entry_value) {
+    double max_score = std::pow(max_entry_value + 1, vector_length) - 1;
+    return [max_score, vector_length, max_entry_value](const std::vector<int>& diversity_scores) -> double {
+        auto sorted_vector = diversity_scores;
+        std::sort(sorted_vector.begin(), sorted_vector.end());
+        double score = 0;
+        for (int i = 0; i < vector_length; i++) {
+            score += sorted_vector[i] * std::pow(max_entry_value + 1, vector_length - 1 - i);
+        }
+        double normalized_score = score / max_score;
+        return 1 - normalized_score;
     };
 }

@@ -5,7 +5,7 @@
     Parameters (in order):
         - output_file: String
         - Mutation-Operator: {"1RAI", "XRAI"}
-        - euclidean_norm : Bool
+        - Diversity-Operator: {"eucl", "sum", "ord"}
         - runs: int
         - mus: mu_1,mu_2,...,mu_w
         - ns: n_1,n_2,...,n_x
@@ -16,9 +16,7 @@
 
 int main(int argc, char **argv){
 
-    auto [output_file, mutation_operator, operator_string, euclidean_norm, runs, mus, ns, ms, alphas] = parse_arguments(argc, argv);
-
-    test_algorithm(mus, ns, ms, alphas, runs, output_file, operator_string, mutation_operator, euclidean_norm);
-  
+    auto [output_file, mutation_operator, mutation_string, diversity_string, runs, mus, ns, ms, alphas] = parse_arguments(argc, argv);
+    test_algorithm(mus, ns, ms, alphas, runs, output_file, mutation_string, mutation_operator, diversity_string);
     return 0;
 }

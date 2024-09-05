@@ -6,7 +6,7 @@
 #include <iostream>
 
 using T = std::vector<std::vector<int>>;
-using L = double;
+using L = int;
 
 // Utility Functions ----------------------------------------------------------------
 

@@ -26,7 +26,7 @@ def generate_table(input_file : str, output_file : str):
         "generations": "$Gen$",
         "max_generations": "$Gen_{max}$"
     }
-    operators = df["mutation"].unique()
+    operators = df["mutation_operator"].unique()
     operator_display_names = {
         "1RAI": "1(R+I)"
     }

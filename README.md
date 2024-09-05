@@ -18,8 +18,11 @@ It now serves as the source code reference and experimental data reference for t
 - [X] Check if proof is possible for general metrics
 - [X] Run the experiments
 - [X] Change paper structure in overleaf
-- [] Consider sorting as alternative method for Euclidean Norm
+- [X] Consider sorting as alternative method for Euclidean Norm
+- [X] Check performance of alternative method
+- [] Alter problem generation by including machine capacities
+- [] Update the table generation utility
+- [] Write the README.md
 - [] Analyze the results
 - [] Write the paper
 - [] Create file for experimental data
-- [] Write the README.md

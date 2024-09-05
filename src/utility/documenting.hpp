@@ -7,7 +7,7 @@
 
 #include "../population/population.hpp"
 
-using L = double;
+using L = int;
 
 void write_to_file(std::string content, std::string filename, bool append = true) {
     #pragma omp critical

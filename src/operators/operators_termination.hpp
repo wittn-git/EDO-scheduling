@@ -7,7 +7,7 @@
 #include "../operators/operators_diversity.hpp"
 
 using T = std::vector<std::vector<int>>;
-using L = double;
+using L = int;
 
 // Termination operators ------------------------------------------------------
 
@@ -18,7 +18,7 @@ using L = double;
         diversity_measure:  diversity measure to use
         max_generations:    maximum number of generations
 */
-std::function<bool(Population<T,L>&)> terminate_diversitygenerations(double diversity_threshold, std::function<double(const std::vector<double>&)> diversity_measure_population, int generation_threshold){
+std::function<bool(Population<T,L>&)> terminate_diversitygenerations(double diversity_threshold, std::function<double(const std::vector<int>&)> diversity_measure_population, int generation_threshold){
     return [diversity_measure_population, diversity_threshold, generation_threshold](Population<T,L>& population) -> bool {
         if(population.get_generation() >= generation_threshold) return true;
         if(population.get_diversity(diversity_measure_population) >= diversity_threshold) return true;
