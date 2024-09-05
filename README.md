@@ -15,11 +15,12 @@ It now serves as the source code reference and experimental data reference for t
 - [X] Change proof to: normalized, length optimized
 - [X] Add stepwise diversity dependent logging in experiments
 - [X] Do preliminary tests for the lambdas of XRAI
-- [] Change paper structure in overleaf
-- [] Run the experiments
+- [X] Check if proof is possible for general metrics
+- [X] Run the experiments
+- [X] Change paper structure in overleaf
 - [] Analyze the results
-- [] Check if proof is possible for general metrics <- Missing step
 - [] Write the paper
+- [] Create file for experimental data
 
 ### Neccessary Latex packages for tables
 \usepackage{array}

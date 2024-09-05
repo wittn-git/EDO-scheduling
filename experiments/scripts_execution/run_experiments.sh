@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-# actual experiments
 lambdas=("0.1" "1" "1.5")
 mus="2,5,10,20,25"
 ns="5,10,15,30,50"
