@@ -18,14 +18,8 @@ It now serves as the source code reference and experimental data reference for t
 - [X] Check if proof is possible for general metrics
 - [X] Run the experiments
 - [X] Change paper structure in overleaf
+- [] Consider sorting as alternative method for Euclidean Norm
 - [] Analyze the results
 - [] Write the paper
 - [] Create file for experimental data
-
-### Neccessary Latex packages for tables
-\usepackage{array}
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage[table]{xcolor}
-\usepackage{hhline}
-\definecolor{lightgray}{RGB}{211, 211, 211}
+- [] Write the README.md
