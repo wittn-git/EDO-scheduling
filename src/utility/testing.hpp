@@ -20,13 +20,13 @@ bool is_viable_combination(int mu, int n, int m){
     return (m < n) && (mu <= (n*n - n)/(n-m));
 }
 
-void loop_parameters(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::function<void(int, int, int, int, float)> func){
+void loop_parameters(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::function<void(int, int, int, double, int)> func){
     int total_runs = ns.size()*mus.size()*ms.size()*alphas.size()*runs;
     #pragma omp parallel for collapse(5)
     for(int n : ns){
         for(int mu : mus){
             for(int m : ms){
-                for(float alpha : alphas){
+                for(double alpha : alphas){
                     for(int run = 0; run < runs; run++){
                         func(mu, n, m, alpha, run);
                     }
@@ -78,8 +78,8 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
     int max_processing_time = 50;
     std::vector<double> div_thresholds = {0.25, 0.5, 0.75, 0.85, 1};
 
-    auto algorithm_test = [output_file, max_processing_time, mutation_operator, mutation_string, diversity_string, div_thresholds](int mu, int n, int m, float alpha, int run) {
-
+    auto algorithm_test = [output_file, max_processing_time, mutation_operator, mutation_string, diversity_string, div_thresholds](int mu, int n, int m, double alpha, int run) {
+        
         if(!is_viable_combination(mu, n, m)) return;
 
         int seed = generate_seed(mu, n, m, alpha, run);
