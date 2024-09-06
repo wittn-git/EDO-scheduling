@@ -11,7 +11,7 @@
         - ns: n_1,n_2,...,n_x
         - ms: m_1,m_2,...m_y
         - alphas: a_1,a_2,...,a_z
-        - lambda: Double (only for "XRAI", mean of the poisson distribution)
+        - lambda: Double (only for "XRAI", mean of the poisson distribution, pass "-" if unused)
 */
 
 int main(int argc, char **argv){
