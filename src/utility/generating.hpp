@@ -22,7 +22,7 @@ std::vector<int> get_processing_times(int seed, int n, int max){
 std::vector<int> get_due_dates(int seed, int m, std::vector<int> processing_times){
     std::vector<int> due_dates(processing_times.size());
     std::mt19937 generator(seed);
-    std::uniform_real_distribution<double> dist_factor(3 / m, 10 / m);
+    std::uniform_real_distribution<double> dist_factor(1 + 1 / m, 5 + 5 / m);
     for(int i = 0; i < processing_times.size(); i++){
         double factor = dist_factor(generator);
         double muh = factor * processing_times[i];

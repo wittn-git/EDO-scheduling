@@ -13,7 +13,7 @@ using L = int;
 // Utility function for testing -----------------------------------------------------
 
 int generate_seed(int mu, int n, int m, double alpha, int run){
-    return n*mu*mu+n*run*run+n+m*run+m*m+run + alpha*100*run*n; 
+    return n*mu*mu+n*run*run+n+m*run+m*m+run; 
 }
 
 bool is_viable_combination(int mu, int n, int m){

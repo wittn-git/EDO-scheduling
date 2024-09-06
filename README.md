@@ -43,10 +43,11 @@ They can also be passed directly to the executable, after the code in the "src" 
 - [X] Change paper structure in overleaf
 - [X] Consider sorting as alternative method for Euclidean Norm
 - [X] Check performance of alternative method
-- [X] Alter problem generation by including machine capacities
-- [X] Run the experiments
 - [X] Write the README.md
-- [] Update the table generation utility
+- [X] Update the table generation utility
+- [X] Alter problem generation by including machine capacities
+- [X] Modify seed generation
+- [] Run the experiments
 - [] Analyze the results
 - [] Write the paper
 - [] Create file for experimental data
