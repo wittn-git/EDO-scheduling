@@ -3,15 +3,15 @@
 
 /*
     Parameters (in order):
-        - output_file: String
+        - output_file: string
         - Mutation-Operator: {"1RAI", "XRAI"}
         - Diversity-Operator: {"eucl", "sum", "ord"}
         - runs: int
-        - mus: mu_1,mu_2,...,mu_w
-        - ns: n_1,n_2,...,n_x
-        - ms: m_1,m_2,...m_y
-        - alphas: a_1,a_2,...,a_z
-        - lambda: Double (only for "XRAI", mean of the poisson distribution, pass "-" if unused)
+        - mus: mu_1,mu_2,...,mu_w (ints)
+        - ns: n_1,n_2,...,n_x (ints)
+        - ms: m_1,m_2,...m_y (ints)
+        - alphas: a_1,a_2,...,a_z (doubles)
+        - lambda: double (only for "XRAI", mean of the poisson distribution, pass "-" if unused)
 */
 
 int main(int argc, char **argv){

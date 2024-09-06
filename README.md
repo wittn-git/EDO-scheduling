@@ -16,15 +16,15 @@ To execute the experiments with the parameter combinations presented in the pape
 
 If one wishes to execute the experiments with different parameter sets, one can do so by changing the parameter sets in the "run_experiments.sh" script. Alternativly, the "run.sh" in the "experiments/scripts_execution" folder can be used to run the experiments with a single parameter set. In this case, the parameter sets have to be passed as an argument to the script. The parameters are the following:
 
-    - output_file: String
-    - Mutation-Operator: {"1RAI", "XRAI"}
-    - Diversity-Operator: {"eucl", "sum", "ord"}
-    - runs: int
-    - mus: mu_1,mu_2,...,mu_w
-    - ns: n_1,n_2,...,n_x
-    - ms: m_1,m_2,...m_y
-    - alphas: a_1,a_2,...,a_z
-    - lambda: Double (only for "XRAI", mean of the poisson distribution, pass "-" if unused)
+    - output_file: string                           [path to the output file]
+    - Mutation-Operator: {"1RAI", "XRAI"}           [mutation operator used in the EA]
+    - Diversity-Operator: {"eucl", "sum", "ord"}    [method of transforming the diversity vector to a scalar]
+    - runs: int                                     [number of runs of the EA per parameter set]
+    - mus: mu_1,mu_2,...,mu_w (ints)                [population sizes]
+    - ns: n_1,n_2,...,n_x (ints)                    [numbers of jobs]
+    - ms: m_1,m_2,...m_y (ints)                     [numbers of machines]
+    - alphas: a_1,a_2,...,a_z (doubles)             [quality parameters]
+    - lambda: double ("-" if unused")               [mean of the poisson distribution for "XRAI"]
 
 They can also be passed directly to the executable, after the code in the "src" folder is complied using CMake.
 
