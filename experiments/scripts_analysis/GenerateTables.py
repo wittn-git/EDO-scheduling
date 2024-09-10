@@ -1,11 +1,11 @@
 import sys
 import pandas as pd
 
-def generate_table(input_file : str, output_folder : str, div_threshold : float):
+def generate_table(input_file : str, output_folder : str, div_threshold : str):
 
     with open(input_file, "r") as f:
         df = pd.read_csv(f)
-    df = df[df["div_threshold"] == div_threshold]
+    df = df[df["div_threshold"] == float(div_threshold)]
 
     mutation_operators = df["mutation_operator"].unique()
     for mutation_operator in mutation_operators:
@@ -102,6 +102,6 @@ if __name__ == "__main__" :
   
     input_file = sys.argv[1]
     output_folder = sys.argv[2]
-    div_threshold = float(sys.argv[3])
+    div_threshold = sys.argv[3]
 
     generate_table(input_file, output_folder, div_threshold)
