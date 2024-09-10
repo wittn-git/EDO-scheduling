@@ -47,6 +47,7 @@ They can also be passed directly to the executable, after the code in the "src" 
 - [X] Update the table generation utility
 - [X] Alter problem generation by including machine capacities
 - [X] Modify seed generation
+- [] Find a way to compute the ordering method for larger instances
 - [] Run the experiments
 - [] Analyze the results
 - [] Write the paper
