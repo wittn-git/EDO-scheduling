@@ -6,7 +6,7 @@ ns="5,10,15,25,50"
 ms="1,3,5"
 runs="30"
 alphas="0.3,0.6,1"
-diversity_operators=("eucl" "sum" "ord")
+diversity_operators=("eucl" "sum") # "ord" currently not supported
 
 output_path="../experiments/data/runs"
 

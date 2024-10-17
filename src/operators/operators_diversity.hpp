@@ -58,15 +58,5 @@ std::function<double(const std::vector<int>&)> diversity_population_eucl(double 
 }
 
 std::function<double(const std::vector<int>&)> diversity_population_ord(int vector_length, int max_entry_value) {
-    double max_score = std::pow(max_entry_value + 1, vector_length) - 1;
-    return [max_score, vector_length, max_entry_value](const std::vector<int>& diversity_scores) -> double {
-        auto sorted_vector = diversity_scores;
-        std::sort(sorted_vector.begin(), sorted_vector.end());
-        double score = 0;
-        for (int i = 0; i < vector_length; i++) {
-            score += sorted_vector[i] * std::pow(max_entry_value + 1, vector_length - 1 - i);
-        }
-        double normalized_score = score / max_score;
-        return 1 - normalized_score;
-    };
+    throw std::runtime_error("Not implemented");
 }
