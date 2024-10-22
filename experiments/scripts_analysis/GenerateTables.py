@@ -37,7 +37,7 @@ def generate_table(input_file : str, output_folder : str, div_threshold : str):
         diversity_operators = {
             "eucl": "$\\lVert \\cdot \\rVert_2$",
             "sum": "$\\sum$",
-            "ord": "$\\prec$"
+        #   "ord": "$\\prec$"
         }
 
         output_file = f"{output_folder}/table_{mutation_operator}_div[{div_threshold}].tex"

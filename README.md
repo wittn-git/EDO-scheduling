@@ -12,7 +12,7 @@ The folder "src" contains the C++ source code for the implementation of the used
 
 The folder experiments is divided in three folders. The "data" folder contains all results of the experiments in csv format. The "scripts_analysis" folder contains the python scripts used to summarize and analyze the results as well as scripts for the generation of tables and plots. The "scripts_execution" folder contains bash scripts to run the experiments with the parameter sets in the paper as well as to run the analysis scripts.
 
-To execute the experiments with the parameter combinations presented in the paper, one simly has to navigate to "experiments/scripts_execution" and execute the bash script "run_experiments.sh". The results will be stored in the "data/runs" folder. Using the the bash script "summarize_results.sh" the results will be concatenated and aggregated in the "data" folder.
+To execute the experiments with the parameter combinations presented in the paper, one simply has to navigate to "experiments/scripts_execution" and execute the bash script "run_experiments.sh". The results will be stored in the "data/runs" folder. Using the bash script "summarize_results.sh" the results will be concatenated and aggregated in the "data" folder.
 
 If one wishes to execute the experiments with different parameter sets, one can do so by changing the parameter sets in the "run_experiments.sh" script. Alternativly, the "run.sh" in the "experiments/scripts_execution" folder can be used to run the experiments with a single parameter set. In this case, the parameter sets have to be passed as an argument to the script. The parameters are the following:
 
@@ -49,8 +49,8 @@ They can also be passed directly to the executable, after the code in the "src" 
 - [X] Modify seed generation
 - [X] Finish table compile utility
 - [X] Find a way to compute the ordering method for larger instances
-- [] Run the experiments
+- [X] Run the experiments
 - [] Write utility to make a trajectory plot for a single parameter set
 - [] Analyze the results
 - [] Write the paper
-- [] Create file for experimental data
+- [] Compile a file containing the results of the experiments

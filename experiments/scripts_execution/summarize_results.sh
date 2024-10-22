@@ -6,7 +6,7 @@ python3 ../scripts_analysis/SummarizeRuns.py ../data/aggregated/concatenated.csv
 
 mkdir -p ../data/tables
 rm -f ../data/tables/*
-div_thresholds=("0.25" "0.50" "0.75" "0.85" "1.00")
+div_thresholds=("0" "0.1" "0.25" "0.4" "0.5" "0.65" "0.75" "0.8" "0.85" "0.9" "0.95" "1")
 
 for div_threshold in "${div_thresholds[@]}"; do
     python3 ../scripts_analysis/GenerateTables.py ../data/aggregated/aggregated.csv ../data/tables $div_threshold
