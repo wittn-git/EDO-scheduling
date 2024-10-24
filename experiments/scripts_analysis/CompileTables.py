@@ -11,10 +11,11 @@ def compile_tables(input_folder):
     table_files.sort()
 
     with open(f"{input_folder}/compiled_tables.tex", "w") as f:
-        f.write('''\\documentclass{article}\n\\usepackage{array}\n\\usepackage{booktabs}\n\\usepackage{amsmath}\n\\usepackage{multirow}\n\\usepackage[table]{xcolor}\n\\usepackage{hhline}\n\\definecolor{lightgray}{RGB}{211, 211, 211}\n\\usepackage[margin=0cm]{geometry} \n\\begin{document}\n''')
+        f.write('''\\documentclass{article}\n\\usepackage{array}\n\\usepackage{booktabs}\n\\usepackage{amsmath}\n\\usepackage{multirow}\n\\usepackage[table]{xcolor}\n\\usepackage{hhline}\n\\definecolor{lightgray}{RGB}{211, 211, 211}\n\\usepackage[margin=0cm]{geometry} \n\\usepackage{relsize} \n\\newcommand{\customsize}{\\relsize{-3.5}} \n\\begin{document}\n''')
         for table_file in table_files:
-            f.write(f"\\input{{{table_file}}}")
-            f.write("\n")
+            f.write(f"\\verb|{table_file}|\n")
+            f.write(f"\\input{{{table_file}}}\n")
+            f.write("\\newpage\n")
 
         f.write("\\end{document}")
         

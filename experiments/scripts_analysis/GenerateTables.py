@@ -12,7 +12,7 @@ def generate_table(input_file : str, output_folder : str, div_threshold : str):
 
         filtered_df = df[df["mutation_operator"] == mutation_operator]
     
-        font_name = "tiny"
+        font_name = "customsize"
         parameter_columns = {"mu": "$\\mu$", "n": "$n$", "m": "$m$", "alpha": "$\\alpha$"}
         groups = filtered_df.groupby(list(parameter_columns.keys()))
         def get_group_count(index, current_key):
@@ -40,7 +40,7 @@ def generate_table(input_file : str, output_folder : str, div_threshold : str):
         #   "ord": "$\\prec$"
         }
 
-        output_file = f"{output_folder}/table_{mutation_operator}_div[{div_threshold}].tex"
+        output_file = f"{output_folder}/table_{mutation_operator}_div[{float(div_threshold):.2f}].tex"
         with open(output_file, "w") as f:
 
             f.write("\\begin{center}\n\\renewcommand{\\tabcolsep}{4pt}\n\\renewcommand{\\arraystretch}{1.1}\n") # basic table starting commands
