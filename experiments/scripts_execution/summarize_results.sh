@@ -13,3 +13,21 @@ for div_threshold in "${div_thresholds[@]}"; do
 done
 python3 ../scripts_analysis/CompileTables.py ../data/tables
 pdflatex -output-directory=../data/tables ../data/tables/compiled_tables.tex
+
+mus=("2" "5" "10" "25")
+ns=("5" "10" "15" "25" "50")
+ms=("1" "3" "5")
+alphas=("0.3" "0.6" "1")
+operators=("1RAI" "XRAI_0.10" "XRAI_1.50" "XRAI_1.00")
+
+for operator in "${operators[@]}"; do
+    for mu in "${mus[@]}"; do
+        for n in "${ns[@]}"; do
+            for m in "${ms[@]}"; do
+                for alpha in "${alphas[@]}"; do
+                    python3 ../scripts_analysis/PlotTrajectoryGraph.py ../data/aggregated/aggregated.csv ../data/plots $mu $n $m $alpha $operator
+                done
+            done
+        done
+    done
+done
