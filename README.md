@@ -51,6 +51,6 @@ They can also be passed directly to the executable, after the code in the "src" 
 - [X] Find a way to compute the ordering method for larger instances
 - [X] Run the experiments
 - [X] Write utility to make a trajectory plot for a single parameter set
-- [] Write utility to get a numerical analysis of the results
+- [X] Write utility to get a numerical analysis of the results
 - [] Write the paper
 - [] Compile a file containing the results of the experiments

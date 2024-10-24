@@ -1,6 +1,5 @@
-# if there are not three args: print usage
-if [ "$#" -ne 3 ]; then
-    echo "Usage: bash summarize_results.sh <aggregate> <table> <plot>"
+if [ "$#" -ne 4 ]; then
+    echo "Usage: bash summarize_results.sh <aggregate> <table> <plot> <numerical>"
     exit 1
 fi
 
@@ -42,4 +41,8 @@ if [ "$3" = "true" ]; then
             done
         done
     done
+fi
+
+if [ "$4" = "true" ]; then 
+    python3 ../scripts_analysis/AnalyzeNumerical.py ../data/aggregated/concatenated.csv ../data/other
 fi
