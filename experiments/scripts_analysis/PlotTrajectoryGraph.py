@@ -7,6 +7,9 @@ def plot_trajectory_graph(input_file, output_folder, mu, n, m, alpha, mutation_o
     df = pd.read_csv(input_file)
     df = df[(df["mu"] == mu) & (df["n"] == n) & (df["m"] == m) & (df["alpha"] == alpha) & (df["mutation_operator"] == mutation_operator)]
 
+    if df.empty:
+        return
+
     properties = [("generations", "diversity"), ("diversity", "ending_robustness")]
     fig, ax = plt.subplots(1, len(properties), figsize=(10, 5*len(properties)))
 
