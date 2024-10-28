@@ -28,6 +28,20 @@ If one wishes to execute the experiments with different parameter sets, one can 
 
 They can also be passed directly to the executable, after the code in the "src" folder is complied using CMake.
 
+## Requirements
+
+The experiments have been ran on Ubuntu 24.04.1 LTS.
+Requirements to use the whole respository (running and analysis of experiments) are:
+
+- g++ 13.2.0
+- cmake 3.28.3
+- python 3.12.3
+- pdflatex 3.141592653-2.6-1.40.25
+- bash 5.2.21(1)
+- inkscape 1.2.2
+
+In addition, the python packages specified in "experiments/scripts_analysis/requirements.txt" are needed.
+
 ## TODO (Revision of paper)
 
 - [X] Add the robustness experiments
@@ -52,5 +66,12 @@ They can also be passed directly to the executable, after the code in the "src" 
 - [X] Run the experiments
 - [X] Write utility to make a trajectory plot for a single parameter set
 - [X] Write utility to get a numerical analysis of the results
-- [] Write the paper
-- [] Compile a file containing the results of the experiments
+- [X] Add the plots to the result file
+- [] Extend numerical analysis
+- [] Add numerical analysis to the result file
+- [] Think about changes in the experiment parameters: more combinations, more runs, changes restriction of parameters
+- [] Write the result section of the paper
+- [] Write the conclusion of the paper (and future work)
+- [] Think about title and keywords of the paper
+- [] Format paper and improve language
+- [] Beautify the result file

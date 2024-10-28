@@ -1,35 +1,54 @@
-import sys
 import pandas as pd
-import matplotlib.pyplot as plt
+from itertools import chain, combinations
+from collections import Counter
+import prettytable as pt
+import sys
 
-def analyze_numerical(input_file : str, output_folder : str) -> None:
+def analyze_numerical(input_file_con, input_file_agg, output_folder):
+    # Load the data
+    df = pd.read_csv(input_file_con)
+
+    # Define columns and get all combinations
+    # TODO get over
+    # TODO summarize better and only take more speficic columns
+    columns = ['mu', 'n', 'm', 'alpha', 'mutation_operator']
+    column_combinations = chain.from_iterable(combinations(columns, r) for r in range(1, len(columns)+1))  # Exclude empty combination
+    operators = df["diversity_operator"].unique()
     
-    df = pd.read_csv(input_file)
-    result = df.groupby(['mutation_operator', 'diversity_operator', 'div_threshold'])['ending_robustness'].sum().reset_index()
-    result = result.sort_values(by=['mutation_operator', 'div_threshold', 'diversity_operator'])
-    result.to_csv(output_folder + "/result.csv", index=False)
-
-    # plot the data. make one graph for each mutation operator. there, plot div_threshold on x vs ending_robustness on y. one line for each diversity operator
-    mutation_operators = result['mutation_operator'].unique()
-    for mutation_operator in mutation_operators:
-        data = result[result['mutation_operator'] == mutation_operator]
-        diversity_operators = data['diversity_operator'].unique()
-        for diversity_operator in diversity_operators:
-            data_div = data[data['diversity_operator'] == diversity_operator]
-            plt.plot(data_div['div_threshold'], data_div['ending_robustness'], label=diversity_operator)
-        plt.xlabel('div_threshold')
-        plt.ylabel('ending_robustness')
-        plt.title(mutation_operator)
-        plt.legend()
-        plt.savefig(output_folder + "/" + mutation_operator + ".png")
-        plt.close()
+    with open(output_folder + "/output.txt", 'w') as f:
+        # Iterate over each column combination
+        for column_combination in column_combinations:
+            f.write("Column combination: " + str(column_combination) + "\n")
+            table = pt.PrettyTable()
+            table.field_names = ["Values"] + list(operators)
+            
+            # Group by the current column combination
+            grouped = df.groupby(list(column_combination))
+            
+            # For each group, count the diversity operator with highest robustness
+            for values, group in grouped:
+                # Check for highest robustness per seed
+                max_counts = Counter()
+                
+                for seed, seed_group in group.groupby('seed'):
+                    max_robustness = seed_group['ending_robustness'].max()
+                    top_operators = seed_group[seed_group['ending_robustness'] == max_robustness]['diversity_operator'].values
+                    max_counts.update(top_operators)
+                
+                # Prepare table row
+                row = [values] + [max_counts.get(op, 0) for op in operators]
+                table.add_row(row)
+            
+            # Write the table to the output file
+            f.write(str(table) + "\n\n")
 
 if __name__ == "__main__" :
 
-    if len(sys.argv) < 3:
-        print("Usage: python3 AnalyzeNumerical.py <input_file> <output_folder>")
+    if len(sys.argv) < 4:
+        print("Usage: python3 AnalyzeNumerical.py <input_file_concatenated> <input_file_aggregated> <output_folder>")
         exit(1)
     
-    input_file, output_folder = sys.argv[1], sys.argv[2]
+    input_file_con, input_file_agg = sys.argv[1], sys.argv[2]
+    output_folder = sys.argv[3]
 
-    analyze_numerical(input_file, output_folder)
+    analyze_numerical(input_file_con, input_file_agg, output_folder)

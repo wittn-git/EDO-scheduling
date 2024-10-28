@@ -38,7 +38,6 @@ info.txt
 \bin
 \test
 
-experiments/scripts_analysis/results/*
-
-experiments/scripts_hpc/results/*
-experiments/scripts_hpc/temp_job.sh
+experiments/data/tables/*
+experiments/data/plots/*
+experiments/data/numerical/*
