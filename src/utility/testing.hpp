@@ -73,7 +73,7 @@ std::tuple<int, int> get_restricted_jobs(int n, int seed){
 
 void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::string output_file, std::string mutation_string, std::function<std::vector<T>(const std::vector<T>&, std::mt19937&)> mutation_operator, std::string diversity_string){
    
-    std::string header = get_csv_line("seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation_operator,starting_robustness,ending_robustness,diversity_operator,div_threshold");
+    std::string header = get_csv_line("seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation_operator,starting_robustness,ending_robustness,diversity_operator,diversity_threshold");
     write_to_file(header, output_file, false);
     int max_processing_time = 50;
     std::vector<double> div_thresholds = {0, 0.1, 0.25, 0.4, 0.5, 0.65, 0.75, 0.8, 0.85, 0.9, 0.95, 1};

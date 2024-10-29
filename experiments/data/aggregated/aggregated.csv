@@ -1,4 +1,4 @@
-mu,n,m,alpha,mutation_operator,div_threshold,diversity_operator,generations,max_generations,diversity,fitness,opt,starting_robustness,ending_robustness,generation_ratio
+mu,n,m,alpha,mutation_operator,diversity_threshold,diversity_operator,generations,max_generations,diversity,fitness,opt,starting_robustness,ending_robustness,generation_ratio
 2,5,1,0.3,1RAI,0.0,eucl,0.0,100.0,0.0,0.03333333333333333,0.03333333333333333,0.26666666666666666,0.26666666666666666,0.0
 2,5,1,0.3,1RAI,0.0,sum,0.0,100.0,0.0,0.03333333333333333,0.03333333333333333,0.26666666666666666,0.26666666666666666,0.0
 2,5,1,0.3,1RAI,0.1,eucl,1.3666666666666667,100.0,0.49333333333333335,0.03333333333333333,0.03333333333333333,0.26666666666666666,0.36666666666666664,0.013666666666666667

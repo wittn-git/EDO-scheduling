@@ -4,7 +4,7 @@ import sys
 
 def plot_trajectory_graph(df, output_folder, file_format, mu, n):
 
-    properties = [("generations", "div_threshold"), ("div_threshold", "ending_robustness")]
+    properties = [("diversity_threshold", "generations"), ("diversity_threshold", "ending_robustness")]
     fig, ax = plt.subplots(1, len(properties), figsize=(10, 5*len(properties)))
 
     color_map = plt.get_cmap("tab10")
@@ -13,13 +13,9 @@ def plot_trajectory_graph(df, output_folder, file_format, mu, n):
 
     for i, (x, y) in enumerate(properties):
 
-        df_temp = None
+        df_temp = df.groupby(["diversity_operator", "mutation_operator", x])[y].mean().reset_index()
         if i == 0: 
-            df_temp = df.groupby(["diversity_operator", "mutation_operator", y])[x].mean().reset_index()
-            df_temp = df_temp[df_temp["div_threshold"] != 1.0]
-        if i == 1:
-            df_temp = df.groupby(["diversity_operator", "mutation_operator", x])[y].mean().reset_index()
-            
+            df_temp = df_temp[df_temp["diversity_threshold"] != 1.0]
         
         for diversity_operator in df["diversity_operator"].unique():
             for j, mutation_operator in enumerate(df["mutation_operator"].unique()):

@@ -1,11 +1,11 @@
 import sys
 import pandas as pd
 
-def generate_table(input_file : str, output_folder : str, div_threshold : str):
+def generate_table(input_file : str, output_folder : str, diversity_threshold : str):
 
     with open(input_file, "r") as f:
         df = pd.read_csv(f)
-    df = df[df["div_threshold"] == float(div_threshold)]
+    df = df[df["diversity_threshold"] == float(diversity_threshold)]
 
     mutation_operators = df["mutation_operator"].unique()
     for mutation_operator in mutation_operators:
@@ -40,7 +40,7 @@ def generate_table(input_file : str, output_folder : str, div_threshold : str):
         #   "ord": "$\\prec$"
         }
 
-        output_file = f"{output_folder}/table_{mutation_operator}_div[{float(div_threshold):.2f}].tex"
+        output_file = f"{output_folder}/table_{mutation_operator}_div[{float(diversity_threshold):.2f}].tex"
         with open(output_file, "w") as f:
 
             f.write("\\begin{center}\n\\renewcommand{\\tabcolsep}{4pt}\n\\renewcommand{\\arraystretch}{1.1}\n") # basic table starting commands
@@ -97,11 +97,11 @@ def generate_table(input_file : str, output_folder : str, div_threshold : str):
 if __name__ == "__main__" :
 
     if len(sys.argv) < 4:
-        print("Usage: python3 GenerateTables.py <input_file> <output_folder> <div_threshold>")
+        print("Usage: python3 GenerateTables.py <input_file> <output_folder> <diversity_threshold>")
         exit(1)
   
     input_file = sys.argv[1]
     output_folder = sys.argv[2]
-    div_threshold = sys.argv[3]
+    diversity_threshold = sys.argv[3]
 
-    generate_table(input_file, output_folder, div_threshold)
+    generate_table(input_file, output_folder, diversity_threshold)

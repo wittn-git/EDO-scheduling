@@ -1,4 +1,4 @@
-seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation_operator,starting_robustness,ending_robustness,diversity_operator,div_threshold
+seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation_operator,starting_robustness,ending_robustness,diversity_operator,diversity_threshold
 26,2,5,1,0.3,0,0,100,0,0,0,XRAI_1.00,0,0,sum,0
 26,2,5,1,0.3,0,1,100,1,0,0,XRAI_1.00,0,0,sum,0.1
 26,2,5,1,0.3,0,1,100,1,0,0,XRAI_1.00,0,0,sum,0.25

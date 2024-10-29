@@ -1,4 +1,4 @@
-seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation_operator,starting_robustness,ending_robustness,diversity_operator,div_threshold
+seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation_operator,starting_robustness,ending_robustness,diversity_operator,diversity_threshold
 126,2,25,1,0.3,0,0,2500,0,10,10,1RAI,0,0,eucl,0
 126,2,25,1,0.3,0,1,2500,0.12,10,10,1RAI,0,0,eucl,0.1
 10396,2,15,5,0.3,26,0,900,0,0,0,1RAI,0,0,eucl,0

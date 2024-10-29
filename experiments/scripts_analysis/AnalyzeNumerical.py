@@ -1,46 +1,47 @@
 import pandas as pd
-from itertools import chain, combinations
 from collections import Counter
 import prettytable as pt
 import sys
 
+# TODO Analyze the following three aspects: generations, how many which operator had the best robustness, what as the average improvement of the best operator
 def analyze_numerical(input_file_con, input_file_agg, output_folder):
-    # Load the data
+    
     df = pd.read_csv(input_file_con)
-
-    # Define columns and get all combinations
-    # TODO get over
-    # TODO summarize better and only take more speficic columns
-    columns = ['mu', 'n', 'm', 'alpha', 'mutation_operator']
-    column_combinations = chain.from_iterable(combinations(columns, r) for r in range(1, len(columns)+1))  # Exclude empty combination
+    column_combinations = [
+        ["mu"], ["n"], ["m"], ["alpha"], ["mutation_operator"],
+        ["mu", "n"], ["mu", "n", "m"], ["mu", "n", "m", "alpha"]
+    ]
     operators = df["diversity_operator"].unique()
+    diversity_thresholds = df["diversity_threshold"].unique()
     
     with open(output_folder + "/output.txt", 'w') as f:
-        # Iterate over each column combination
+
+        f.write("Overall\n")
+        table = pt.PrettyTable()
+        table.field_names = ["Div thresh."] + list(operators)
+        for div_thresh in diversity_thresholds:
+            df_thresh = df[df["diversity_threshold"] == div_thresh]
+            best_operator_counts = {op: 0 for op in operators}
+            grouped = df_thresh.groupby(["mu", "n", "m", "alpha", "run"])
+            
+            for _, group in grouped:
+                max_robustness = group["ending_robustness"].max()
+                best_operators = group[group["ending_robustness"] == max_robustness]["diversity_operator"]
+                for best_operator in best_operators:
+                    best_operator_counts[best_operator] += 1
+            table.add_row([div_thresh] + [best_operator_counts[op] for op in operators])
+        f.write(str(table) + "\n\n")
+        '''
         for column_combination in column_combinations:
             f.write("Column combination: " + str(column_combination) + "\n")
             table = pt.PrettyTable()
             table.field_names = ["Values"] + list(operators)
             
-            # Group by the current column combination
-            grouped = df.groupby(list(column_combination))
-            
-            # For each group, count the diversity operator with highest robustness
-            for values, group in grouped:
-                # Check for highest robustness per seed
-                max_counts = Counter()
-                
-                for seed, seed_group in group.groupby('seed'):
-                    max_robustness = seed_group['ending_robustness'].max()
-                    top_operators = seed_group[seed_group['ending_robustness'] == max_robustness]['diversity_operator'].values
-                    max_counts.update(top_operators)
-                
-                # Prepare table row
-                row = [values] + [max_counts.get(op, 0) for op in operators]
-                table.add_row(row)
-            
-            # Write the table to the output file
+            # get each unique value of the column combination
+            values = df[column_combination].drop_duplicates()
+
             f.write(str(table) + "\n\n")
+        '''
 
 if __name__ == "__main__" :
 
