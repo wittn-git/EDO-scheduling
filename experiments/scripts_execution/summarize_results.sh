@@ -26,7 +26,7 @@ fi
 
 if [ "$3" = "True" ]; then 
     mkdir -p ../data/numerical
-    python3 ../scripts_analysis/AnalyzeNumerical.py ../data/aggregated/concatenated.csv ../data/aggregated/aggregated.csv ../data/numerical
+    python3 ../scripts_analysis/AnalyzeNumerical.py ../data/aggregated/concatenated.csv ../data/numerical
 fi
 
 if [ "$4" = "True" ]; then

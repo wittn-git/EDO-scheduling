@@ -44,32 +44,36 @@ In addition, the python packages specified in "experiments/scripts_analysis/requ
 
 ## TODO (Revision of paper)
 
-- [X] Add the robustness experiments
-- [X] Revise the summary of the experiments
-- [X] Revise the experiment running code
-- [X] Revise the table generation
-- [X] Alter DFM definition
-- [X] Set table format
-- [X] Change proof to: normalized, length optimized
-- [X] Add stepwise diversity dependent logging in experiments
-- [X] Do preliminary tests for the lambdas of XRAI
-- [X] Check if proof is possible for general metrics
-- [X] Change paper structure in overleaf
-- [X] Consider sorting as alternative method for Euclidean Norm
-- [X] Check performance of alternative method
-- [X] Write the README.md
-- [X] Update the table generation utility
-- [X] Alter problem generation by including machine capacities
-- [X] Modify seed generation
-- [X] Finish table compile utility
-- [X] Find a way to compute the ordering method for larger instances
-- [X] Run the experiments
-- [X] Write utility to make a trajectory plot for a single parameter set
-- [X] Write utility to get a numerical analysis of the results
-- [X] Add the plots to the result file
-- [] Extend numerical analysis
+- [x] Add the robustness experiments
+- [x] Revise the summary of the experiments
+- [x] Revise the experiment running code
+- [x] Revise the table generation
+- [x] Alter DFM definition
+- [x] Set table format
+- [x] Change proof to: normalized, length optimized
+- [x] Add stepwise diversity dependent logging in experiments
+- [x] Do preliminary tests for the lambdas of XRAI
+- [x] Check if proof is possible for general metrics
+- [x] Change paper structure in overleaf
+- [x] Consider sorting as alternative method for Euclidean Norm
+- [x] Check performance of alternative method
+- [x] Write the README.md
+- [x] Update the table generation utility
+- [x] Alter problem generation by including machine capacities
+- [x] Modify seed generation
+- [x] Finish table compile utility
+- [x] Find a way to compute the ordering method for larger instances
+- [x] Run the experiments
+- [x] Write utility to make a trajectory plot for a single parameter set
+- [x] Write utility to get a numerical analysis of the results
+- [x] Add the plots to the result file
+- [x] Numerical analysis: Superiority of operators
+- [x] Numerical analysis: Improvement of operators
+- [] Numerical analysis: Overall superiority of operators
+- [] Fix error in calculation of starting robustness
 - [] Add numerical analysis to the result file
 - [] Think about changes in the experiment parameters: more combinations, more runs, changes restriction of parameters
+- [] Rerun tests
 - [] Write the result section of the paper
 - [] Write the conclusion of the paper (and future work)
 - [] Think about title and keywords of the paper
