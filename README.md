@@ -69,9 +69,11 @@ In addition, the python packages specified in "experiments/scripts_analysis/requ
 - [x] Add the plots to the result file
 - [x] Numerical analysis: Superiority of operators
 - [x] Numerical analysis: Improvement of operators
-- [] Numerical analysis: Overall superiority of operators
+- [x] Numerical analysis: Overall superiority of operators
+- [x] Write count runs
+- [x] Write tablerization of count runs in numerical analysis
+- [x] Add numerical analysis to the result file
 - [] Fix error in calculation of starting robustness
-- [] Add numerical analysis to the result file
 - [] Think about changes in the experiment parameters: more combinations, more runs, changes restriction of parameters
 - [] Rerun tests
 - [] Write the result section of the paper

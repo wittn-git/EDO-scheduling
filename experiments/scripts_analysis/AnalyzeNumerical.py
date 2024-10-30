@@ -3,84 +3,62 @@ import prettytable as pt
 import sys
 import os
 
-def analyze_numerical(input_file, output_folder):
-    df = pd.read_csv(input_file)
-    
+def analyze_numerical(input_file_count, input_file_agg, output_folder):
+
+    df = pd.read_csv(input_file_count)
     column_combinations = [
         ["mu"], ["n"], ["m"], ["alpha"], ["mutation_operator"],
         ["mu", "n"], ["mu", "n", "m"], ["mu", "n", "m", "alpha"], ["mu", "n", "m", "alpha", "mutation_operator"]
     ]
     
-    operators = df["diversity_operator"].unique()
+    df_agg = pd.read_csv(input_file_agg)
+    diversity_operators = list(df_agg["diversity_operator"].unique()) + ["equal"]
     diversity_thresholds = df["diversity_threshold"].unique()
     
     for diversity_threshold in diversity_thresholds:
         df_thresh = df[df["diversity_threshold"] == diversity_threshold]
         output_file = os.path.join(output_folder, f"analysis_{diversity_threshold:.2f}.txt")
-        
         with open(output_file, "w") as f:
 
             f.write("Overall\n")
             table = pt.PrettyTable()
-            table.field_names = list(operators) + ["Equal"]
-            count_sum, count_eucl, count_eq = 0, 0, 0
-            grouped = df_thresh.groupby(["mu", "n", "m", "alpha", "run", "mutation_operator"])
-            
-            for _, group in grouped:
-                rob_eucl = group.loc[group["diversity_operator"] == "eucl", "ending_robustness"].mean()
-                rob_sum = group.loc[group["diversity_operator"] == "sum", "ending_robustness"].mean()
-                if rob_sum > rob_eucl: count_sum += 1
-                elif rob_sum == rob_eucl: count_eq += 1
-                else: count_eucl += 1
-            
-            avg_rob_sum = df_thresh[df_thresh["diversity_operator"] == "sum"]["ending_robustness"].mean() - df_thresh[df_thresh["diversity_operator"] == "sum"]["starting_robustness"].mean()
-            avg_rob_eucl = df_thresh[df_thresh["diversity_operator"] == "eucl"]["ending_robustness"].mean() - df_thresh[df_thresh["diversity_operator"] == "eucl"]["starting_robustness"].mean()
-
-            table.add_row([
-                f"{count_sum} ({avg_rob_sum:.4f})", 
-                f"{count_eucl} ({avg_rob_eucl:.4f})", 
-                count_eq
-            ])
+            table.field_names = list(diversity_operators)
+            row = []
+            for op in diversity_operators:
+                count = df_thresh[df_thresh["superior_op"] == op].shape[0]
+                if op != "equal": 
+                    count = (count, df_thresh[f"{op}_improvement"].mean())
+                row.append(count)
+            table.add_row(row)
             f.write(str(table) + "\n\n")
                 
             for column_combination in column_combinations:
                 f.write(f"Column combination: {column_combination}\n")
                 table = pt.PrettyTable()
-                table.field_names = ["Values"] + list(operators) + ["Equal"]
-                values = df_thresh[column_combination].drop_duplicates()
-                for _, value_row in values.iterrows():
+                table.field_names = ["Values"] + list(diversity_operators)
+                values = df_thresh[column_combination].drop_duplicates().values
+                for value_row in values:
                     df_value = df_thresh
                     for col, val in zip(column_combination, value_row):
                         df_value = df_value[df_value[col] == val]
-                    grouped = df_value.groupby(["mu", "n", "m", "alpha", "mutation_operator", "run"])
-                    count_sum, count_eucl, count_eq = 0, 0, 0
-                    for _, group in grouped:
-                        rob_eucl = group.loc[group["diversity_operator"] == "eucl", "ending_robustness"].mean()
-                        rob_sum = group.loc[group["diversity_operator"] == "sum", "ending_robustness"].mean()
-                        if rob_sum > rob_eucl: count_sum += 1
-                        elif rob_sum == rob_eucl: count_eq += 1
-                        else: count_eucl += 1
-                    
-                    avg_rob_sum = df_thresh[df_thresh["diversity_operator"] == "sum"]["ending_robustness"].mean() - df_thresh[df_thresh["diversity_operator"] == "sum"]["starting_robustness"].mean()
-                    avg_rob_eucl = df_thresh[df_thresh["diversity_operator"] == "eucl"]["ending_robustness"].mean() - df_thresh[df_thresh["diversity_operator"] == "eucl"]["starting_robustness"].mean()
-
-                    table.add_row([
-                        str(value_row.values), 
-                        f"{count_sum} ({avg_rob_sum:.4f})", 
-                        f"{count_eucl} ({avg_rob_eucl:.4f})", 
-                        count_eq
-                    ])
+                    row = [value_row] 
+                    for op in diversity_operators:
+                        count = df_value[df_value["superior_op"] == op].shape[0]
+                        if op != "equal":
+                            count = (count, df_thresh[f"{op}_improvement"].mean())
+                        row.append(count)
+                    table.add_row(row)
                 
                 f.write(str(table) + "\n\n")
 
 
 if __name__ == "__main__" :
 
-    if len(sys.argv) < 3:
-        print("Usage: python3 AnalyzeNumerical.py <input_file_concatenated> <output_folder>")
+    if len(sys.argv) < 4:
+        print("Usage: python3 AnalyzeNumerical.py <input_file_count> <input_file_agg> <output_folder>")
         exit(1)
     
-    input_file = sys.argv[1]
-    output_folder = sys.argv[2]
+    input_file_count, input_file_agg = sys.argv[1], sys.argv[2]
+    output_folder = sys.argv[3]
 
-    analyze_numerical(input_file, output_folder)
+    analyze_numerical(input_file_count, input_file_agg, output_folder)

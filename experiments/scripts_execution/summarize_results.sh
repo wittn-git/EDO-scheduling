@@ -9,7 +9,7 @@ if [ "$1" = "True" ]; then
     rm -f ../data/aggregated/concatenated.csv
     rm -f ../data/aggregated/aggregated.csv
     python3 ../scripts_analysis/ConcatFiles.py ../data/runs ../data/aggregated/concatenated.csv
-    python3 ../scripts_analysis/SummarizeRuns.py ../data/aggregated/concatenated.csv ../data/aggregated/aggregated.csv
+    python3 ../scripts_analysis/AggregateRuns.py ../data/aggregated/concatenated.csv ../data/aggregated/aggregated.csv ../data/aggregated/counted.csv
 fi
 
 if [ "$2" = "True" ]; then
@@ -26,7 +26,7 @@ fi
 
 if [ "$3" = "True" ]; then 
     mkdir -p ../data/numerical
-    python3 ../scripts_analysis/AnalyzeNumerical.py ../data/aggregated/concatenated.csv ../data/numerical
+    python3 ../scripts_analysis/AnalyzeNumerical.py ../data/aggregated/counted.csv ../data/aggregated/aggregated.csv ../data/numerical
 fi
 
 if [ "$4" = "True" ]; then
@@ -38,7 +38,7 @@ if [ "$4" = "True" ]; then
     done
 fi
 
-python3 ../scripts_analysis/CompileResults.py ../data/other/result_file.tex $5 ../data/plots $6 ../data/other $7 ../data/tables
+python3 ../scripts_analysis/CompileResults.py ../data/other/result_file.tex $5 ../data/plots $6 ../data/numerical $7 ../data/tables
 pdflatex -output-directory=../data/other -shell-escape ../data/other/result_file.tex
 rm -f ../data/other/result_file.aux ../data/other/result_file.log 
 rm -r svg-inkscape
