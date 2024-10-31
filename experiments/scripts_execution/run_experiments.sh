@@ -4,7 +4,7 @@ lambdas=("0.1" "1" "1.5")
 mus="2,5,10,25"
 ns="5,10,15,25,50"
 ms="1,3,5"
-runs="30"
+runs="50"
 alphas="0.3,0.6,1"
 diversity_operators=("eucl" "sum") # "ord" currently not supported
 

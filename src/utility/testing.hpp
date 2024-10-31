@@ -76,7 +76,8 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
     std::string header = get_csv_line("seed,mu,n,m,alpha,run,generations,max_generations,diversity,fitness,opt,mutation_operator,starting_robustness,ending_robustness,diversity_operator,diversity_threshold");
     write_to_file(header, output_file, false);
     int max_processing_time = 50;
-    std::vector<double> div_thresholds = {0, 0.1, 0.25, 0.4, 0.5, 0.65, 0.75, 0.8, 0.85, 0.9, 0.95, 1};
+    std::vector<double> div_thresholds;
+    for(double i = 0; i <= 1; i += 0.05) div_thresholds.emplace_back(i);
 
     auto algorithm_test = [output_file, max_processing_time, mutation_operator, mutation_string, diversity_string, div_thresholds](int mu, int n, int m, double alpha, int run) {
         
@@ -94,9 +95,10 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
             evaluate, mutation_operator, diversity_measure_individual, diversity_measure_population,
             alpha, optimal_solution
         );
+        bool starting_robustness = check_robustness(population.get_genes(false), restricted_jobs);
 
         for(double threshold : div_thresholds){
-            auto [starting_robustness, ending_robustness] = run_mu1(
+            bool ending_robustness = run_mu1(
                 population,
                 terminate_diversitygenerations(threshold, diversity_measure_population, max_generations),
                 restricted_jobs

@@ -47,14 +47,11 @@ Population<T,L> create_population(
     return population;
 }
 
-std::tuple<bool, bool> run_mu1(
+bool run_mu1(
     Population<T,L>& population,
     std::function<bool(Population<T,L>&)> termination_criterion,
     std::tuple<int, int> restricted_jobs
 ){
-    bool starting_robustness = check_robustness(population.get_genes(false), restricted_jobs);
     population.execute(termination_criterion);
-    bool ending_robustness = check_robustness(population.get_genes(false), restricted_jobs);
-
-    return std::make_tuple(starting_robustness, ending_robustness);
+    return check_robustness(population.get_genes(false), restricted_jobs);
 }
