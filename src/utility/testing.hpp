@@ -77,7 +77,10 @@ void test_algorithm(std::vector<int> mus, std::vector<int> ns, std::vector<int> 
     write_to_file(header, output_file, false);
     int max_processing_time = 50;
     std::vector<double> div_thresholds;
-    for(double i = 0; i <= 1; i += 0.05) div_thresholds.emplace_back(i);
+    for(int i = 0; i <= 100; i += 5) {
+        double k = (double) i / 100;
+        div_thresholds.push_back(k);
+    }
 
     auto algorithm_test = [output_file, max_processing_time, mutation_operator, mutation_string, diversity_string, div_thresholds](int mu, int n, int m, double alpha, int run) {
         
