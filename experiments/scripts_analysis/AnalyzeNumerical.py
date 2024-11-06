@@ -27,7 +27,7 @@ def analyze_numerical(input_file_count, input_file_agg, output_folder):
             for op in diversity_operators:
                 count = df_thresh[df_thresh["superior_op"] == op].shape[0]
                 if op != "equal": 
-                    count = (count, df_thresh[f"{op}_improvement"].mean())
+                    count = (count, round(df_thresh[f"{op}_improvement"].mean(), 5))
                 row.append(count)
             table.add_row(row)
             f.write(str(table) + "\n\n")

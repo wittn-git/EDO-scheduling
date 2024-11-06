@@ -9,20 +9,36 @@ def aggregate_runs(input_file : str, output_file : str):
     df['generation_ratio'] = df['generations'] / df['max_generations']
     df.to_csv(output_file, index=False)
 
-def count_runs(input_file : str, output_file : str):
+def count_runs(input_file: str, output_file: str):
     df = pd.read_csv(input_file)
-    grouped = df.groupby(["mu", "n", "m", "alpha", "run", "mutation_operator", "diversity_threshold"])
+    grouped = df.groupby(["mu", "n", "m", "alpha", "run", "mutation_operator", "diversity_threshold", "diversity_operator"])
+    mean_robustness = grouped.agg(
+        ending_robustness=('ending_robustness', 'mean'),
+        starting_robustness=('starting_robustness', 'mean')
+    ).reset_index()
+    pivot = mean_robustness.pivot(
+        index=["mu", "n", "m", "alpha", "run", "mutation_operator", "diversity_threshold"],
+        columns="diversity_operator",
+        values=["ending_robustness", "starting_robustness"]
+    )
     diversity_operators = df["diversity_operator"].unique()
-    cols = ["mu", "n", "m", "alpha", "mutation_operator", "run", "diversity_threshold", "superior_op"] + [f"{op}_improvement" for op in diversity_operators]
-    df_results = pd.DataFrame(columns=cols)
-    for _, group in grouped:
-        robustness = {op: group.loc[group["diversity_operator"] == op, "ending_robustness"].mean() for op in diversity_operators}
-        superior_operator = max(robustness, key=robustness.get) if len(set(robustness.values())) == len(robustness) else "equal"
-        improvements = {f"{op}_improvement": robustness[op] - group.loc[group["diversity_operator"] == op, "starting_robustness"].mean() for op in diversity_operators}
-        row = group.iloc[0][["mu", "n", "m", "alpha", "mutation_operator", "run", "diversity_threshold"]].to_dict()
-        row["superior_op"] = superior_operator
-        row.update(improvements)
-        df_results = pd.concat([df_results, pd.DataFrame([row])])
+    results = []
+    
+    for _, row in pivot.iterrows():
+        # TODO improvements are not calculated correctly
+        starting_values, ending_values = row["starting_robustness"].to_dict(), row["ending_robustness"].to_dict()        
+        improvements = {f"{op}_improvement": ending_values[op] - starting_values[op] for op in diversity_operators}
+        max_robustness = max(ending_values.values())
+        superior_operator = (
+            [op for op, val in ending_values.items() if val == max_robustness]
+            if list(ending_values.values()).count(max_robustness) == 1 else ["equal"]
+        )[0]
+        result_row = dict(zip(pivot.index.names, row.name))
+        result_row["superior_op"] = superior_operator
+        result_row.update(improvements)
+        results.append(result_row)
+    
+    df_results = pd.DataFrame(results)
     df_results.to_csv(output_file, index=False)
     
 if __name__ == "__main__":
@@ -36,3 +52,4 @@ if __name__ == "__main__":
 
     aggregate_runs(input_file, output_file_agg)
     count_runs(input_file, output_file_count)
+    
