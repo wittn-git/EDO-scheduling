@@ -5,7 +5,7 @@ def compile_tables(output_file, include_plots, input_folder_plots, include_numer
 
     with open(output_file, "w") as f:
 
-        f.write('''\\documentclass{article}\n\\usepackage{array}\n\\usepackage{booktabs}\n\\usepackage{svg}\n\\usepackage{amsmath}\n\\usepackage{multirow}\n\\usepackage[table]{xcolor}\n\\usepackage{hhline}\n\\definecolor{lightgray}{RGB}{211, 211, 211}\n\\usepackage[margin=0cm]{geometry} \n\\usepackage{relsize} \n\\newcommand{\\customsize}{\\relsize{-3.5}} \n\\begin{document}\n''')
+        f.write('''\\documentclass{article}\n\\usepackage{array}\n\\usepackage{booktabs}\n\\usepackage[inkscapearea=page,inkscapeversion=1.2.2]{svg}\n\\usepackage{amsmath}\n\\usepackage{multirow}\n\\usepackage[table]{xcolor}\n\\usepackage{hhline}\n\\definecolor{lightgray}{RGB}{211, 211, 211}\n\\usepackage[margin=0cm]{geometry} \n\\usepackage{relsize} \n\\newcommand{\\customsize}{\\relsize{-3.5}} \n\\begin{document}\n''')
         
         if include_plots:
             plot_files = sorted([plot_file for plot_file in os.listdir(input_folder_plots) if plot_file.endswith(".svg")])

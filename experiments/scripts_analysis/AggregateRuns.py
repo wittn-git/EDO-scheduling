@@ -25,7 +25,6 @@ def count_runs(input_file: str, output_file: str):
     results = []
     
     for _, row in pivot.iterrows():
-        # TODO improvements are not calculated correctly
         starting_values, ending_values = row["starting_robustness"].to_dict(), row["ending_robustness"].to_dict()        
         improvements = {f"{op}_improvement": ending_values[op] - starting_values[op] for op in diversity_operators}
         max_robustness = max(ending_values.values())
@@ -50,6 +49,6 @@ if __name__ == "__main__":
     input_file = sys.argv[1]
     output_file_agg, output_file_count = sys.argv[2], sys.argv[3]
 
-    aggregate_runs(input_file, output_file_agg)
+    #aggregate_runs(input_file, output_file_agg)
     count_runs(input_file, output_file_count)
     

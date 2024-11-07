@@ -74,8 +74,8 @@ In addition, the python packages specified in "experiments/scripts_analysis/requ
 - [x] Write tablerization of count runs in numerical analysis
 - [x] Add numerical analysis to the result file
 - [x] Fix error in calculation of starting robustness
-- [] Rerun tests
-- [] Think about changes in the experiment parameters: more combinations, changes restriction of parameters
+- [x] Rerun tests
+- [x] Think about changes in the experiment parameters: more combinations, changes restriction of parameters
 - [] Write the result section of the paper
 - [] Write the conclusion of the paper (and future work)
 - [] Think about title and keywords of the paper

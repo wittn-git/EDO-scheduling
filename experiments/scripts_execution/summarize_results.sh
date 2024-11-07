@@ -32,7 +32,10 @@ fi
 if [ "$4" = "True" ]; then
     mkdir -p ../data/tables
     rm -f ../data/tables/*
-    div_thresholds=("0" "0.1" "0.25" "0.4" "0.5" "0.65" "0.75" "0.8" "0.85" "0.9" "0.95" "1")
+    div_thresholds=()
+    for i in $(seq 0 0.05 1); do
+        div_thresholds+=($i)
+    done
     for div_threshold in "${div_thresholds[@]}"; do
         python3 ../scripts_analysis/GenerateTables.py ../data/aggregated/aggregated.csv ../data/tables $div_threshold
     done
