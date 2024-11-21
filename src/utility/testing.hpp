@@ -17,7 +17,8 @@ int generate_seed(int mu, int n, int m, double alpha, int run){
 }
 
 bool is_viable_combination(int mu, int n, int m){
-    return (m < n) && (mu <= n/m);
+    // return (m < n) && (mu <= n/m);
+    return (m >= n) || (mu > n/m);
 }
 
 void loop_parameters(std::vector<int> mus, std::vector<int> ns, std::vector<int> ms, std::vector<double> alphas, int runs, std::function<void(int, int, int, double, int)> func){
