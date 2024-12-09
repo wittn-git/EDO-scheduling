@@ -25,8 +25,8 @@ def count_data(input_file : str):
         print(f"Operators: {mut_op}, {div_op}")
 
         for mu, n, m, alpha in parameter_combinations:
-            if not((m < n) and (mu <= n/m)):
-                continue
+            #if not((m < n) and (mu <= n/m)): TODO: Uncomment this line to filter out invalid parameter combinations
+            #    continue
             df_filtered = df[(df['mu'] == mu) & (df['n'] == n) & (df['m'] == m) & (df['alpha'] == alpha) & (df['mutation_operator'] == mut_op) & (df['diversity_operator'] == div_op)]
             current_points_n = len(df_filtered)
             if current_points_n != datapoints_n:

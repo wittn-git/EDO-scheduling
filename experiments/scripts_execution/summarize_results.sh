@@ -1,5 +1,5 @@
 if [ "$#" -ne 9 ]; then
-    # to run a full summary, set all arguments to True
+    # to run a full summary, set all arguments (9) to True
     echo "Usage: bash summarize_results.sh <aggregate> <count_data> <create_plots> <create_numerical> <create_tables> <compile_results> <compile_plots> <compile_numerical> <compile_tables>"
     exit 1
 fi

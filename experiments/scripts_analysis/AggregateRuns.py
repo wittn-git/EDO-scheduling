@@ -49,6 +49,6 @@ if __name__ == "__main__":
     input_file = sys.argv[1]
     output_file_agg, output_file_count = sys.argv[2], sys.argv[3]
 
-    #aggregate_runs(input_file, output_file_agg)
+    aggregate_runs(input_file, output_file_agg)
     count_runs(input_file, output_file_count)
     
