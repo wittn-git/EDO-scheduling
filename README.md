@@ -76,6 +76,9 @@ In addition, the python packages specified in "experiments/scripts_analysis/requ
 - [x] Fix error in calculation of starting robustness
 - [x] Rerun tests
 - [x] Think about changes in the experiment parameters: more combinations, changes restriction of parameters
+- [X] Run experiments without max div restrictions
+- [X] Write plot counts utility
+- [] Execute full summary
 - [] Write the result section of the paper
 - [] Write the conclusion of the paper (and future work)
 - [] Think about title and keywords of the paper
