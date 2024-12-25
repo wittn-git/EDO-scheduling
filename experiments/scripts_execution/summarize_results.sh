@@ -20,7 +20,7 @@ fi
 if [ "$3" = "True" ]; then
     mkdir -p ../data/plots
     rm -f ../data/plots/*
-    python3 ../scripts_analysis/PlotCounts.py ../data/aggregated/counted.csv ../data/aggregated/aggregated.csv ../data/plots svg
+    python3 ../scripts_analysis/PlotCounts.py ../data/aggregated/counted.csv ../data/plots svg
     mus=("2" "5" "10" "25")
     ns=("5" "10" "15" "25" "50")
     for mu in "${mus[@]}"; do
