@@ -90,9 +90,15 @@ A pdf of the experimental results can be found in the main folder of the reposit
 - [x] Clean Latex Document
 - [x] Check for parameter restrictions
 - [] Include missing related work
-- [] Write the result section of the paper
-- [] Write the conclusion of the paper (and future work)
+- [] Write draft of result section
+- [] Write draft of conclusion of the paper (and future work)
+- [] Revise the result and conclusion section
 - [] Think about title of the paper
 - [] Format paper and improve language
 - [] Clean up sources
 - [] Remove TODO list from README.md
+
+Open Questions:
+- How are cases where maximum diversity is not reached handled in numerical analysis?
+- Countplot: relative or absolute values?
+- Percentageplot: collection or overall?
