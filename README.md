@@ -86,12 +86,12 @@ A pdf of the experimental results can be found in the main folder of the reposit
 - [x] Result file: count tables
 - [x] Implementation of result file compilation
 - [x] Clean up the repo
-- [] Compile the result file
-- [] Clean Latex Document
-- [] Check for parameter restrictions
+- [x] Compile the result file
+- [x] Clean Latex Document
+- [x] Check for parameter restrictions
+- [] Include missing related work
 - [] Write the result section of the paper
 - [] Write the conclusion of the paper (and future work)
-- [] Include missing related work
 - [] Think about title of the paper
 - [] Format paper and improve language
 - [] Clean up sources
