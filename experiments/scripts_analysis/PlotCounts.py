@@ -75,7 +75,7 @@ def plot_counts(input_file_count, output_folder, file_extension):
             ax.set_yticks([])
         ax.set_ylim([min_val, max_val])
     
-    output_file = os.path.join(output_folder, f"countplot_all.{file_extension}")
+    output_file = os.path.join(output_folder, f"countplot.{file_extension}")
     fig.savefig(output_file, bbox_inches='tight')
 
 if __name__ == "__main__" :

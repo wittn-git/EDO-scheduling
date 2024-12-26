@@ -13,7 +13,6 @@ def get_unbalanced_vector(vec_size, max_sim, count):
 
 def get_div_fun(p, vec_size, max_sim):
     max_value = sum([x**p for x in [max_sim]*vec_size])**(1/p)
-    print(max_value)
     def div_fun(vec):
         return 1 - (sum([x**p for x in vec])**(1/p)) / max_value
     return div_fun
