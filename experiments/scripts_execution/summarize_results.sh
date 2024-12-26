@@ -21,13 +21,9 @@ if [ "$3" = "True" ]; then
     mkdir -p ../data/plots
     rm -f ../data/plots/*
     python3 ../scripts_analysis/PlotCounts.py ../data/aggregated/counted.csv ../data/plots svg
-    mus=("2" "5" "10" "25")
-    ns=("5" "10" "15" "25" "50")
-    for mu in "${mus[@]}"; do
-        for n in "${ns[@]}"; do
-            python3 ../scripts_analysis/PlotTrajectoryGraph.py ../data/aggregated/aggregated.csv ../data/plots svg $mu $n
-        done
-    done
+    python3 ../scripts_analysis/PlotPercentages.py ../data/aggregated/counted.csv ../data/plots svg
+    python3 ../scripts_analysis/PlotClusterExample.py ../data/plots/clusterexample.svg 50 50 2
+    python3 ../scripts_analysis/PlotGenerations.py ../data/aggregated/aggregated.csv ../data/plots svg
 fi
 
 if [ "$4" = "True" ]; then 

@@ -76,11 +76,18 @@ In addition, the python packages specified in "experiments/scripts_analysis/requ
 - [x] Fix error in calculation of starting robustness
 - [x] Rerun tests
 - [x] Think about changes in the experiment parameters: more combinations, changes restriction of parameters
-- [X] Run experiments without max div restrictions
-- [X] Write plot counts utility
-- [] Execute full summary
+- [x] Run experiments without max div restrictions
+- [x] Write plot counts utility
+- [x] Execute full summary
+- [x] Write generation plot util
+- [] Implement the result file compilation
+- [] Clean up the repo
+- [] Compile the result file
+- [] Check for parameter restrictions
 - [] Write the result section of the paper
 - [] Write the conclusion of the paper (and future work)
-- [] Think about title and keywords of the paper
+- [] Include missing related work
+- [] Think about title of the paper
 - [] Format paper and improve language
-- [] Beautify the result file
+- [] Clean up sources
+- [] Remove TODO list from README.md

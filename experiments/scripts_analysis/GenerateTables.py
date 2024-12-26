@@ -36,7 +36,7 @@ def generate_table(input_file : str, output_folder : str, diversity_threshold : 
 
         diversity_operators = {
             "eucl": "$\\lVert \\cdot \\rVert_2$",
-            "sum": "$\\sum$",
+            "sum": "$\\sum \cdot$",
         #   "ord": "$\\prec$"
         }
 

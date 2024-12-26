@@ -6,7 +6,6 @@ def get_balanced_vector(vec_size, max_sim, count):
     remainder = count % vec_size
     return [min(max_sim, base_value + (1 if i < remainder else 0)) for i in range(vec_size)]
 
-
 def get_unbalanced_vector(vec_size, max_sim, count):
     full_index = int(count // max_sim)
     vector = [max_sim] * full_index + [count % max_sim] + [0] * (vec_size - full_index - 1)
@@ -36,7 +35,7 @@ def generate_plot(output_file, mu, max_sim, p):
     plt.ylabel("div(P)")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(output_file)
+    plt.savefig(output_file, bbox_inches='tight')
 
 if __name__ == "__main__" :
     if len(sys.argv) < 5:
