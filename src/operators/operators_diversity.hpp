@@ -56,7 +56,3 @@ std::function<double(const std::vector<int>&)> diversity_population_eucl(double 
         return 1 - (euclideanNorm(diversity_scores) / max_value);
     };
 }
-
-std::function<double(const std::vector<int>&)> diversity_population_ord(int vector_length, int max_entry_value) {
-    throw std::runtime_error("Not implemented");
-}

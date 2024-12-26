@@ -80,9 +80,11 @@ In addition, the python packages specified in "experiments/scripts_analysis/requ
 - [x] Write plot counts utility
 - [x] Execute full summary
 - [x] Write generation plot util
-- [] Implement the result file compilation
+- [] Result file: count tables
+- [] Implementation of result file compilation
 - [] Clean up the repo
 - [] Compile the result file
+- [] Clean Latex Document
 - [] Check for parameter restrictions
 - [] Write the result section of the paper
 - [] Write the conclusion of the paper (and future work)

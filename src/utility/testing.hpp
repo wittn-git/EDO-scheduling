@@ -55,8 +55,6 @@ std::tuple<std::function<std::vector<L>(const std::vector<T>&)>, std::function<d
     }else if (diversity_string == "sum"){
         double max_value = ((mu * mu - mu)/2)*n;
         diversity_measure_population = diversity_population_sum(max_value);
-    }else if (diversity_string == "ord"){
-        diversity_measure_population = diversity_population_ord((mu * mu - mu)/2, n);
     }
     return std::make_tuple(evaluate, diversity_measure_individual, diversity_measure_population);
 }
