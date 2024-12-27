@@ -15,10 +15,9 @@ def plot_percentages(input_file_count, output_folder, file_extension):
         X = []
         for div_thresh in diversity_thresholds:
             df_thresh = df[df["diversity_threshold"] == div_thresh]
-            X.append(df_thresh[f"{op}_improvement"].mean())
+            X.append(df_thresh[f"{op}_improvement"].mean()*100)
         plt.plot(diversity_thresholds, X, label=op_mapping[op], linestyle=line_styles[i], color='black', linewidth=2)
 
-    
     plt.xlabel("Diversity")
     plt.ylabel("Improvement (%)")
     plt.legend()

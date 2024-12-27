@@ -6,9 +6,11 @@ fi
 
 if [ "$1" = "True" ]; then
     mkdir -p ../data/aggregated
+    mkdir -p ../data/other
+    rm -f ../data/other/threshold_passing.txt
     rm -f ../data/aggregated/*
     python3 ../scripts_analysis/ConcatFiles.py ../data/runs ../data/aggregated/concatenated.csv
-    python3 ../scripts_analysis/AggregateRuns.py ../data/aggregated/concatenated.csv ../data/aggregated/aggregated.csv ../data/aggregated/counted.csv
+    python3 ../scripts_analysis/AggregateRuns.py ../data/aggregated/concatenated.csv ../data/aggregated/aggregated.csv ../data/aggregated/counted.csv ../data/other/threshold_passing.txt
 fi
 
 if [ "$2" = "True" ]; then
@@ -19,6 +21,7 @@ if [ "$3" = "True" ]; then
     mkdir -p ../data/plots
     rm -f ../data/plots/*
     python3 ../scripts_analysis/PlotCounts.py ../data/aggregated/counted.csv ../data/plots svg
+    python3 ../scripts_analysis/PlotPercentagesSixfold.py ../data/aggregated/counted.csv ../data/plots svg
     python3 ../scripts_analysis/PlotPercentages.py ../data/aggregated/counted.csv ../data/plots svg
     python3 ../scripts_analysis/PlotClusterExample.py ../data/plots/clusterexample.svg 50 50 2
     python3 ../scripts_analysis/PlotGenerations.py ../data/aggregated/aggregated.csv ../data/plots svg

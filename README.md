@@ -43,7 +43,7 @@ Requirements to use the whole respository (running and analysis of experiments) 
 In addition, the python packages specified in "experiments/scripts_analysis/requirements.txt" are needed.
 
 ## Result File
-A pdf of the experimental results can be found in the main folder of the repository. The file is named "results.pdf".
+A pdf of the experimental results can be found in the main folder of the repository. The file is named "result_file.pdf".
 
 ## TODO (Revision of paper)
 
@@ -89,16 +89,19 @@ A pdf of the experimental results can be found in the main folder of the reposit
 - [x] Compile the result file
 - [x] Clean Latex Document
 - [x] Check for parameter restrictions
-- [] Include missing related work
+- [x] Implement, check, move and write to file: diversity changes in results
+- [x] Make a sixfold percentage plot
+- [x] Include missing related work
+- [] Clean up sources
+- [] Clear up open questions
+- [] Recompile results file and re-add plots to latex
 - [] Write draft of result section
 - [] Write draft of conclusion of the paper (and future work)
 - [] Revise the result and conclusion section
 - [] Think about title of the paper
 - [] Format paper and improve language
-- [] Clean up sources
 - [] Remove TODO list from README.md
 
-Open Questions:
-- How are cases where maximum diversity is not reached handled in numerical analysis?
-- Countplot: relative or absolute values?
-- Percentageplot: collection or overall?
+Question:
+How to to treat the runs, where one or both did not reach the diversity threshold?
+Which plots should not be included in the paper?

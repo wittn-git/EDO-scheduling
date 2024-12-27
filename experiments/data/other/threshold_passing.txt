@@ -1,0 +1,105 @@
+Threshold: 0.0
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.0, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.0, 'none': 0}
+
+Threshold: 0.05
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.022258064516129033, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.02258064516129032, 'none': 0}
+
+Threshold: 0.1
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.028279569892473117, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.02860215053763441, 'none': 0}
+
+Threshold: 0.15
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.03225806451612903, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.03483870967741935, 'none': 0}
+
+Threshold: 0.2
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.03989247311827957, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.04161290322580645, 'none': 0}
+
+Threshold: 0.25
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.044838709677419354, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.04709677419354839, 'none': 0}
+
+Threshold: 0.3
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.048709677419354835, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.051989247311827955, 'none': 0}
+
+Threshold: 0.35
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.056236559139784946, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.05876344086021505, 'none': 0}
+
+Threshold: 0.4
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.06037634408602151, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.06489247311827957, 'none': 0}
+
+Threshold: 0.45
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.06779569892473118, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.07198924731182796, 'none': 0}
+
+Threshold: 0.5
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.07209677419354839, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.07763440860215054, 'none': 0}
+
+Threshold: 0.55
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.079247311827957, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.08569892473118279, 'none': 0}
+
+Threshold: 0.6
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.08446236559139784, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.09327956989247312, 'none': 0}
+
+Threshold: 0.65
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.09344086021505377, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.10317204301075268, 'none': 0}
+
+Threshold: 0.7
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.10220430107526882, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.11193548387096774, 'none': 0}
+
+Threshold: 0.75
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.11349462365591398, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.12505376344086022, 'none': 0}
+
+Threshold: 0.8
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.12446236559139785, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.1374731182795699, 'none': 0}
+
+Threshold: 0.85
+Passing thresholds: {'sum_only': 0, 'eucl_only': 0, 'both': 18600, 'none': 0}
+Improvement sum: {'sum_only': 0, 'eucl_only': 0, 'both': 0.13811827956989248, 'none': 0}
+Improvement eucl: {'sum_only': 0, 'eucl_only': 0, 'both': 0.14994623655913977, 'none': 0}
+
+Threshold: 0.9
+Passing thresholds: {'sum_only': 33, 'eucl_only': 0, 'both': 18567, 'none': 0}
+Improvement sum: {'sum_only': 0.696969696969697, 'eucl_only': 0, 'both': 0.1514514999730705, 'none': 0}
+Improvement eucl: {'sum_only': 0.8484848484848485, 'eucl_only': 0, 'both': 0.16733990413098507, 'none': 0}
+
+Threshold: 0.95
+Passing thresholds: {'sum_only': 586, 'eucl_only': 0, 'both': 17985, 'none': 29}
+Improvement sum: {'sum_only': 0.6757679180887372, 'eucl_only': 0, 'both': 0.16135668612732834, 'none': 0.7931034482758621}
+Improvement eucl: {'sum_only': 0.7542662116040956, 'eucl_only': 0, 'both': 0.16936335835418403, 'none': 0.7586206896551724}
+
+Threshold: 1.0
+Passing thresholds: {'sum_only': 42, 'eucl_only': 27, 'both': 16545, 'none': 1986}
+Improvement sum: {'sum_only': 0.5714285714285714, 'eucl_only': 0.37037037037037035, 'both': 0.14862496222423693, 'none': 0.771399798590131}
+Improvement eucl: {'sum_only': 0.5714285714285714, 'eucl_only': 0.5555555555555556, 'both': 0.1441523118766999, 'none': 0.7849949647532729}
+

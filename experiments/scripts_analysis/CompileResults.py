@@ -73,9 +73,10 @@ def compile(output_file, include_plots, input_folder_plots, include_numerical, i
         if include_plots:
             description_map ={
                 "clusterexample.svg": "Diversity calculated using the euclidean norm in relation to cumulative similarity with a maximum pairwise similarity of 50 and population size 50.",
-                "countplot.svg": "Visualization of the difference of superiority in terms of robustness between the methods of transforming the vector of similarities, i.e. the difference of the number of instances where $\\lVert \\cdot \\rVert _2$ lead to a passed robustness test and $\\Sigma \\cdot$ did not and the reverse (positive values indicating more frequent superiority of $\\lVert \\cdot \\rVert_2$, negative values analogue for $\\Sigma \\cdot$)",
+                "countplot.svg": "Visualization of the difference of superiority in terms of robustness between the methods of transforming the vector of similarities, i.e. the difference of the number of instances where $\\lVert \\cdot \\rVert _2$ lead to a passed robustness test and $\\Sigma \\cdot$ did not and the reverse (positive values indicating more frequent superiority of $\\lVert \\cdot \\rVert_2$, negative values analogue for $\\Sigma \\cdot$), for each parameter group.",
                 "generationplot.svg": "Average of the ratio of the generations passed until termination and the maximum number of generations for different parameter groups.",
-                "percentageplot.svg": "Improvement of robustness from initial robustness to robustness at the respective diversity threshold over all instances of both methods to summarize the vector of similarities."
+                "percentageplot.svg": "Improvement of robustness from initial robustness to robustness at the respective diversity threshold over all instances of both methods to summarize the vector of similarities.",
+                "percentageplot_sixfold.svg": "Improvement of robustness from initial robustness to robustness at the respective diversity threshold over all instances of using $\\lVert \\cdot \\rVert_2$ to summarize the vector of similarities, for each parameter group."
             }
             plot_files = sorted([plot_file for plot_file in os.listdir(input_folder_plots) if plot_file.endswith(".svg")])
             for plot_file in plot_files:

@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def plot_counts(input_file_count, output_folder, file_extension):
+def plot_percentages(input_file_count, output_folder, file_extension):
 
     df = pd.read_csv(input_file_count)
     column_combinations = [
@@ -38,9 +38,8 @@ def plot_counts(input_file_count, output_folder, file_extension):
     overall_X = []
     for diversity_threshold in diversity_thresholds:
         df_thresh = df[(df["diversity_threshold"] == diversity_threshold)]
-        eucl_sup, sum_sup = df_thresh[(df_thresh["superior_op"] == "eucl")].shape[0], df_thresh[(df["superior_op"] == "sum")].shape[0]
-        instances_n = df_thresh.shape[0]
-        overall_X.append((eucl_sup-sum_sup) / instances_n)
+        improvement = df_thresh["eucl_improvement"].mean() 
+        overall_X.append(improvement*100)    
     axes[0].plot(diversity_thresholds, overall_X, linestyle=line_styles[0], color="black")
     X_values.extend(overall_X)
 
@@ -55,13 +54,11 @@ def plot_counts(input_file_count, output_folder, file_extension):
             df_value = df
             for col, val in zip(column_combination, value_row):
                 df_value = df_value[df_value[col] == val]
-        
             X = []
             for diversity_threshold in diversity_thresholds:
                 df_thresh = df_value[(df_value["diversity_threshold"] == diversity_threshold)]
-                eucl_sup, sum_sup = df_thresh[(df_thresh["superior_op"] == "eucl")].shape[0], df_thresh[(df["superior_op"] == "sum")].shape[0]
-                instances_n = df_thresh.shape[0]
-                X.append((eucl_sup-sum_sup)/instances_n)    
+                improvement = df_thresh["eucl_improvement"].mean() 
+                X.append(improvement*100)    
             X_values.extend(X)
             label = str(value_row).replace("[", "").replace("]", "").replace("'", "")  
             label = value_mapping[label] if label in value_mapping else label
@@ -76,23 +73,23 @@ def plot_counts(input_file_count, output_folder, file_extension):
         else:
             ax.set_xticks([])
         if i % 3 == 0:
-            ax.set_ylabel("Count")
+            ax.set_ylabel("Improvement (%)")
         else:
             ax.set_yticks([])
         min_val, max_val = min(X_values)*1.1, max(X_values)*1.1
         ax.set_ylim([min_val, max_val])
     
-    output_file = os.path.join(output_folder, f"countplot.{file_extension}")
+    output_file = os.path.join(output_folder, f"percentageplot_sixfold.{file_extension}")
     fig.savefig(output_file, bbox_inches='tight')
 
 if __name__ == "__main__" :
 
     if len(sys.argv) < 4:
-        print("Usage: python3 PlotCounts.py <input_file_count> <output_folder> <file_extension>")
+        print("Usage: python3 PlotPercentagesSixfold.py <input_file_count> <output_folder> <file_extension>")
         exit(1)
     
     input_file_count = sys.argv[1]
     output_folder = sys.argv[2]
     file_extension = sys.argv[3]
 
-    plot_counts(input_file_count, output_folder, file_extension)
+    plot_percentages(input_file_count, output_folder, file_extension)
