@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def plot_percentages(input_file_count, output_folder, file_extension):
     df = pd.read_csv(input_file_count)
-    op_mapping = {"eucl": "$||\\cdot||_2$", "sum": "$\\sum \\cdot$"}
+    op_mapping = {"eucl": "$||\\cdot||$", "sum": "$\\sum \\cdot$"}
 
     plt.figure(figsize=(12, 6))
     plt.rcParams.update({'font.size': 22})

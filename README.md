@@ -92,16 +92,10 @@ A pdf of the experimental results can be found in the main folder of the reposit
 - [x] Implement, check, move and write to file: diversity changes in results
 - [x] Make a sixfold percentage plot
 - [x] Include missing related work
-- [] Clean up sources
-- [] Clear up open questions
-- [] Recompile results file and re-add plots to latex
-- [] Write draft of result section
+- [x] Clean up sources
+- [x] Write draft of result section
 - [] Write draft of conclusion of the paper (and future work)
-- [] Revise the result and conclusion section
+- [] Clear up open questions (especially handling of non-equal threshold passing)
 - [] Think about title of the paper
 - [] Format paper and improve language
 - [] Remove TODO list from README.md
-
-Question:
-How to to treat the runs, where one or both did not reach the diversity threshold?
-Which plots should not be included in the paper?

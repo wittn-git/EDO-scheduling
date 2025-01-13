@@ -62,8 +62,8 @@ def plot_generations(input_file_count, output_folder, file_extension):
 
     # Add a legend for all subplots
     legend_elements = [
-        Patch(facecolor="white", hatch="", label="eucl", edgecolor="black"),
-        Patch(facecolor="white", hatch="//", label="sum", edgecolor="black")        
+        Patch(facecolor="white", hatch="", label=r'$||\cdot||_2$', edgecolor="black"),
+        Patch(facecolor="white", hatch="//", label=r'$\sum \cdot$', edgecolor="black")        
     ]
     fig.legend(handles=legend_elements, loc="lower center", ncol=2, bbox_to_anchor=(0.5, -0.05))
 
