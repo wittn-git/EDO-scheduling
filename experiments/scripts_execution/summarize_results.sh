@@ -51,6 +51,7 @@ if [ "$6" = "True" ]; then
     rm -f ../data/other/result_file.pdf
     python3 ../scripts_analysis/CompileResults.py ../data/other/result_file.tex $7 ../data/plots $8 ../data/numerical $9 ../data/tables ../data/other/data_packages.tex
     pdflatex -output-directory=../data/other -shell-escape ../data/other/result_file.tex
+    pdflatex -output-directory=../data/other -shell-escape ../data/other/result_file.tex
     rm -f ../data/other/result_file.aux ../data/other/result_file.log 
     rm -f ../data/other/result_file.aux ../data/other/result_file.toc 
     rm -r svg-inkscape

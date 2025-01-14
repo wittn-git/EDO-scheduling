@@ -95,7 +95,7 @@ A pdf of the experimental results can be found in the main folder of the reposit
 - [x] Clean up sources
 - [x] Write draft of result section
 - [x] Write draft of conclusion of the paper (and future work)
-- [] Fix ToC of result file
+- [x] Fix ToC of result file
 - [] Compare plot results of different analysis / diversity threshold approaches
     1. Include all by default
     2. Exclude both cases where one has not reached the threshold completly
