@@ -7,10 +7,12 @@ fi
 if [ "$1" = "True" ]; then
     mkdir -p ../data/aggregated
     mkdir -p ../data/other
+    mkdir -p ../data/stats
     rm -f ../data/other/threshold_passing.txt
     rm -f ../data/aggregated/*
+    rm -f ../data/stats/*
     python3 ../scripts_analysis/ConcatFiles.py ../data/runs ../data/aggregated/concatenated.csv
-    python3 ../scripts_analysis/AggregateRuns.py ../data/aggregated/concatenated.csv ../data/aggregated/aggregated.csv ../data/aggregated/counted.csv ../data/other/threshold_passing.txt
+    python3 ../scripts_analysis/AggregateRuns.py ../data/aggregated/concatenated.csv ../data/aggregated/aggregated.csv ../data/aggregated/counted.csv ../data/stats
 fi
 
 if [ "$2" = "True" ]; then
@@ -20,9 +22,10 @@ fi
 if [ "$3" = "True" ]; then
     mkdir -p ../data/plots
     rm -f ../data/plots/*
-    python3 ../scripts_analysis/PlotCounts.py ../data/aggregated/counted.csv ../data/plots svg
-    python3 ../scripts_analysis/PlotPercentagesSixfold.py ../data/aggregated/counted.csv ../data/plots svg
-    python3 ../scripts_analysis/PlotPercentages.py ../data/aggregated/counted.csv ../data/plots svg
+    mkdir -p ../data/stats
+    python3 ../scripts_analysis/PlotCounts.py ../data/aggregated/counted.csv ../data/plots ../data/stats svg
+    python3 ../scripts_analysis/PlotPercentagesSixfold.py ../data/aggregated/counted.csv ../data/plots ../data/stats svg
+    python3 ../scripts_analysis/PlotPercentages.py ../data/aggregated/counted.csv ../data/plots ../data/stats svg
     python3 ../scripts_analysis/PlotClusterExample.py ../data/plots/clusterexample.svg 50 50 2
     python3 ../scripts_analysis/PlotGenerations.py ../data/aggregated/aggregated.csv ../data/plots svg
 fi

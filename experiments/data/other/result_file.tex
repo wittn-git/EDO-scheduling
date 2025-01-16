@@ -1,0 +1,402 @@
+\documentclass{article} 
+ \usepackage[margin=2cm]{geometry} 
+ \usepackage[inkscapearea=page,inkscapeversion=1.2.2]{svg} 
+\input{../data/other/data_packages.tex}
+                \newcommand{\runningtitle}{Evolutionary Diversity Optimization for Parallel Machine Scheduling}
+                \newcommand{\runningauthors}{D. Wittner and Jakob Bossek}
+
+                \begin{document}
+
+                \title{\textbf{Evolutionary Diversity Optimization} \\ \textbf{for Parallel Machine Scheduling} \\ \vspace{0.8em} \Large Experimental Results}
+
+                \author{Dominic Wittner\inst{1}\orcidID{0009-0008-1290-9541} and Jakob Bossek\inst{2}\orcidID{0000-0002-4121-4668}}
+                \institute{
+                \inst{1}RWTH Aachen, Aachen, Germany\\
+                \email{dominic.wittner@rwth-aachen.de}
+                \and
+                \inst{2}Paderborn University, Paderborn, Germany\\
+                \email{jakob.bossek@uni-paderborn.de}
+                }
+
+                \date{}
+
+                \maketitle
+                \begin{center}
+                \begin{tabular}{c}
+                \inst{1}RWTH Aachen, Aachen, Germany\\
+                \email{dominic.wittner@rwth-aachen.de}\\
+                \inst{2}Paderborn University, Paderborn, Germany\\
+                \email{jakob.bossek@uni-paderborn.de}
+                \end{tabular}
+                \end{center}
+
+                \begin{small}
+                \noindent The following document contains a full account of the experimental results obtained from the experiments conducted for the paper \enquote{Evolutionary Diversity Optimization for Parallel Machine Scheduling} by Dominic Wittner and Jakob Bossek. 
+                It contains the following sections:
+
+                \begin{itemize}
+                    \item \textbf{Section 1:} The plots of the part of the experiments, that can also be found in the paper.
+                    \item \textbf{Section 2:} An account of the data aggregated over the runs for each instance. There exists one table for each diversity threshold and mutation operator. Each cell corresponds to the average value of an attribute of 30 runs of the in the paper presented parameter configurations by the label of columns and rows. FOr each parameter set and diversity operator, the following fields are displayed:
+                    \begin{itemize}
+                        \item $Rob_I$: The percentage of robustness tests passed by the initial population.
+                        \item $Div$: The diversity of the population.
+                        \item $Gen$: The ratio of the number of passed generations and the maximum number of generations.
+                        \item $Rob_F$: The percentage of robustness tests passed by the final population.
+                    \end{itemize}
+                    \item \textbf{Section 3:} An account of the the superiority of the diversity operators. For each diversity threshold, there is a table giving, for each operator, the count of instances, where the it lead to the passing of the robustness test while the other one did not. It also includes the average improvement of the robustness as well as the count of instances, where the operators had equal results. To rule out, that some parameter might be responsible for the superiority, the tables are also split by the parameter configurations. The following fields are displayed:
+                    \begin{itemize}
+                        \item \#Sup: The count of instances, where the operator lead to the passing of the robustness test while the other one did not.
+                        \item $\uparrow$: The average improvement of the robustness.
+                        \item \#: The count of instances, where the operators had equal results.
+                    \end{itemize}
+                \end{itemize}
+                \end{small}
+                \tableofcontents
+                \newpage
+        \newpage
+\section{Plots}
+\begin{figure}[H]
+\centering
+\includesvg[width=0.7\textwidth]{../data/plots/clusterexample.svg} \caption{Diversity calculated using the euclidean norm in relation to cumulative similarity with a maximum pairwise similarity of 50 and population size 50.}
+\vskip-8pt
+\end{figure}
+\begin{figure}[H]
+\centering
+\includesvg[width=0.7\textwidth]{../data/plots/countplot.svg} \caption{Visualization of the difference of superiority in terms of robustness between the methods of transforming the vector of similarities, i.e. the difference of the number of instances where $\lVert \cdot \rVert _2$ lead to a passed robustness test and $\Sigma \cdot$ did not and the reverse (positive values indicating more frequent superiority of $\lVert \cdot \rVert_2$, negative values analogue for $\Sigma \cdot$), for each parameter group.}
+\vskip-8pt
+\end{figure}
+\begin{figure}[H]
+\centering
+\includesvg[width=0.7\textwidth]{../data/plots/generationplot.svg} \caption{Average of the ratio of the generations passed until termination and the maximum number of generations for different parameter groups.}
+\vskip-8pt
+\end{figure}
+\begin{figure}[H]
+\centering
+\includesvg[width=0.7\textwidth]{../data/plots/percentageplot.svg} \caption{Improvement of robustness from initial robustness to robustness at the respective diversity threshold over all instances of both methods to summarize the vector of similarities.}
+\vskip-8pt
+\end{figure}
+\begin{figure}[H]
+\centering
+\includesvg[width=0.7\textwidth]{../data/plots/percentageplot_sixfold.svg} \caption{Improvement of robustness from initial robustness to robustness at the respective diversity threshold over all instances of using $\lVert \cdot \rVert_2$ to summarize the vector of similarities, for each parameter group.}
+\vskip-8pt
+\end{figure}
+\newpage
+\section{Numerical Results}
+\verb|Diversity Threshold: 0.00|
+\input{../data/numerical/table_numerical_div[0.00].tex}
+\newpage
+\verb|Diversity Threshold: 0.05|
+\input{../data/numerical/table_numerical_div[0.05].tex}
+\newpage
+\verb|Diversity Threshold: 0.10|
+\input{../data/numerical/table_numerical_div[0.10].tex}
+\newpage
+\verb|Diversity Threshold: 0.15|
+\input{../data/numerical/table_numerical_div[0.15].tex}
+\newpage
+\verb|Diversity Threshold: 0.20|
+\input{../data/numerical/table_numerical_div[0.20].tex}
+\newpage
+\verb|Diversity Threshold: 0.25|
+\input{../data/numerical/table_numerical_div[0.25].tex}
+\newpage
+\verb|Diversity Threshold: 0.30|
+\input{../data/numerical/table_numerical_div[0.30].tex}
+\newpage
+\verb|Diversity Threshold: 0.35|
+\input{../data/numerical/table_numerical_div[0.35].tex}
+\newpage
+\verb|Diversity Threshold: 0.40|
+\input{../data/numerical/table_numerical_div[0.40].tex}
+\newpage
+\verb|Diversity Threshold: 0.45|
+\input{../data/numerical/table_numerical_div[0.45].tex}
+\newpage
+\verb|Diversity Threshold: 0.50|
+\input{../data/numerical/table_numerical_div[0.50].tex}
+\newpage
+\verb|Diversity Threshold: 0.55|
+\input{../data/numerical/table_numerical_div[0.55].tex}
+\newpage
+\verb|Diversity Threshold: 0.60|
+\input{../data/numerical/table_numerical_div[0.60].tex}
+\newpage
+\verb|Diversity Threshold: 0.65|
+\input{../data/numerical/table_numerical_div[0.65].tex}
+\newpage
+\verb|Diversity Threshold: 0.70|
+\input{../data/numerical/table_numerical_div[0.70].tex}
+\newpage
+\verb|Diversity Threshold: 0.75|
+\input{../data/numerical/table_numerical_div[0.75].tex}
+\newpage
+\verb|Diversity Threshold: 0.80|
+\input{../data/numerical/table_numerical_div[0.80].tex}
+\newpage
+\verb|Diversity Threshold: 0.85|
+\input{../data/numerical/table_numerical_div[0.85].tex}
+\newpage
+\verb|Diversity Threshold: 0.90|
+\input{../data/numerical/table_numerical_div[0.90].tex}
+\newpage
+\verb|Diversity Threshold: 0.95|
+\input{../data/numerical/table_numerical_div[0.95].tex}
+\newpage
+\verb|Diversity Threshold: 1.00|
+\input{../data/numerical/table_numerical_div[1.00].tex}
+\newpage
+\newpage
+\section{Tables}
+\verb|Diversity Threshold: 0.00, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.00].tex}
+\newpage
+\verb|Diversity Threshold: 0.05, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.05].tex}
+\newpage
+\verb|Diversity Threshold: 0.10, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.10].tex}
+\newpage
+\verb|Diversity Threshold: 0.15, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.15].tex}
+\newpage
+\verb|Diversity Threshold: 0.20, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.20].tex}
+\newpage
+\verb|Diversity Threshold: 0.25, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.25].tex}
+\newpage
+\verb|Diversity Threshold: 0.30, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.30].tex}
+\newpage
+\verb|Diversity Threshold: 0.35, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.35].tex}
+\newpage
+\verb|Diversity Threshold: 0.40, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.40].tex}
+\newpage
+\verb|Diversity Threshold: 0.45, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.45].tex}
+\newpage
+\verb|Diversity Threshold: 0.50, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.50].tex}
+\newpage
+\verb|Diversity Threshold: 0.55, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.55].tex}
+\newpage
+\verb|Diversity Threshold: 0.60, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.60].tex}
+\newpage
+\verb|Diversity Threshold: 0.65, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.65].tex}
+\newpage
+\verb|Diversity Threshold: 0.70, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.70].tex}
+\newpage
+\verb|Diversity Threshold: 0.75, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.75].tex}
+\newpage
+\verb|Diversity Threshold: 0.80, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.80].tex}
+\newpage
+\verb|Diversity Threshold: 0.85, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.85].tex}
+\newpage
+\verb|Diversity Threshold: 0.90, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.90].tex}
+\newpage
+\verb|Diversity Threshold: 0.95, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[0.95].tex}
+\newpage
+\verb|Diversity Threshold: 1.00, Mutation Operator: |1(R+I)
+\input{../data/tables/table-1RAI-div[1.00].tex}
+\newpage
+\verb|Diversity Threshold: 0.00, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.00].tex}
+\newpage
+\verb|Diversity Threshold: 0.05, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.05].tex}
+\newpage
+\verb|Diversity Threshold: 0.10, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.10].tex}
+\newpage
+\verb|Diversity Threshold: 0.15, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.15].tex}
+\newpage
+\verb|Diversity Threshold: 0.20, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.20].tex}
+\newpage
+\verb|Diversity Threshold: 0.25, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.25].tex}
+\newpage
+\verb|Diversity Threshold: 0.30, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.30].tex}
+\newpage
+\verb|Diversity Threshold: 0.35, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.35].tex}
+\newpage
+\verb|Diversity Threshold: 0.40, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.40].tex}
+\newpage
+\verb|Diversity Threshold: 0.45, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.45].tex}
+\newpage
+\verb|Diversity Threshold: 0.50, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.50].tex}
+\newpage
+\verb|Diversity Threshold: 0.55, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.55].tex}
+\newpage
+\verb|Diversity Threshold: 0.60, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.60].tex}
+\newpage
+\verb|Diversity Threshold: 0.65, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.65].tex}
+\newpage
+\verb|Diversity Threshold: 0.70, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.70].tex}
+\newpage
+\verb|Diversity Threshold: 0.75, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.75].tex}
+\newpage
+\verb|Diversity Threshold: 0.80, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.80].tex}
+\newpage
+\verb|Diversity Threshold: 0.85, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.85].tex}
+\newpage
+\verb|Diversity Threshold: 0.90, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.90].tex}
+\newpage
+\verb|Diversity Threshold: 0.95, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[0.95].tex}
+\newpage
+\verb|Diversity Threshold: 1.00, Mutation Operator: |X(R+I), $\lambda=0.1$
+\input{../data/tables/table-XRAI_0.10-div[1.00].tex}
+\newpage
+\verb|Diversity Threshold: 0.00, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.00].tex}
+\newpage
+\verb|Diversity Threshold: 0.05, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.05].tex}
+\newpage
+\verb|Diversity Threshold: 0.10, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.10].tex}
+\newpage
+\verb|Diversity Threshold: 0.15, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.15].tex}
+\newpage
+\verb|Diversity Threshold: 0.20, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.20].tex}
+\newpage
+\verb|Diversity Threshold: 0.25, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.25].tex}
+\newpage
+\verb|Diversity Threshold: 0.30, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.30].tex}
+\newpage
+\verb|Diversity Threshold: 0.35, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.35].tex}
+\newpage
+\verb|Diversity Threshold: 0.40, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.40].tex}
+\newpage
+\verb|Diversity Threshold: 0.45, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.45].tex}
+\newpage
+\verb|Diversity Threshold: 0.50, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.50].tex}
+\newpage
+\verb|Diversity Threshold: 0.55, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.55].tex}
+\newpage
+\verb|Diversity Threshold: 0.60, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.60].tex}
+\newpage
+\verb|Diversity Threshold: 0.65, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.65].tex}
+\newpage
+\verb|Diversity Threshold: 0.70, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.70].tex}
+\newpage
+\verb|Diversity Threshold: 0.75, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.75].tex}
+\newpage
+\verb|Diversity Threshold: 0.80, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.80].tex}
+\newpage
+\verb|Diversity Threshold: 0.85, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.85].tex}
+\newpage
+\verb|Diversity Threshold: 0.90, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.90].tex}
+\newpage
+\verb|Diversity Threshold: 0.95, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[0.95].tex}
+\newpage
+\verb|Diversity Threshold: 1.00, Mutation Operator: |X(R+I), $\lambda=1$
+\input{../data/tables/table-XRAI_1.00-div[1.00].tex}
+\newpage
+\verb|Diversity Threshold: 0.00, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.00].tex}
+\newpage
+\verb|Diversity Threshold: 0.05, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.05].tex}
+\newpage
+\verb|Diversity Threshold: 0.10, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.10].tex}
+\newpage
+\verb|Diversity Threshold: 0.15, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.15].tex}
+\newpage
+\verb|Diversity Threshold: 0.20, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.20].tex}
+\newpage
+\verb|Diversity Threshold: 0.25, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.25].tex}
+\newpage
+\verb|Diversity Threshold: 0.30, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.30].tex}
+\newpage
+\verb|Diversity Threshold: 0.35, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.35].tex}
+\newpage
+\verb|Diversity Threshold: 0.40, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.40].tex}
+\newpage
+\verb|Diversity Threshold: 0.45, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.45].tex}
+\newpage
+\verb|Diversity Threshold: 0.50, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.50].tex}
+\newpage
+\verb|Diversity Threshold: 0.55, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.55].tex}
+\newpage
+\verb|Diversity Threshold: 0.60, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.60].tex}
+\newpage
+\verb|Diversity Threshold: 0.65, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.65].tex}
+\newpage
+\verb|Diversity Threshold: 0.70, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.70].tex}
+\newpage
+\verb|Diversity Threshold: 0.75, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.75].tex}
+\newpage
+\verb|Diversity Threshold: 0.80, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.80].tex}
+\newpage
+\verb|Diversity Threshold: 0.85, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.85].tex}
+\newpage
+\verb|Diversity Threshold: 0.90, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.90].tex}
+\newpage
+\verb|Diversity Threshold: 0.95, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[0.95].tex}
+\newpage
+\verb|Diversity Threshold: 1.00, Mutation Operator: |X(R+I), $\lambda=1.5$
+\input{../data/tables/table-XRAI_1.50-div[1.00].tex}
+\newpage
+\end{document}

@@ -37,7 +37,3 @@ src/main
 info.txt
 \bin
 \test
-
-experiments/data/tables/*
-experiments/data/plots/*
-experiments/data/numerical/*

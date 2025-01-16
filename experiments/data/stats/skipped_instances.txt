@@ -1,0 +1,4 @@
+Both missed threshold: 2015
+Eucl missed threshold: 661
+Sum missed threshold: 27
+Total datapoints: 390600

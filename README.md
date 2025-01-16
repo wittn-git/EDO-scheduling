@@ -96,11 +96,7 @@ A pdf of the experimental results can be found in the main folder of the reposit
 - [x] Write draft of result section
 - [x] Write draft of conclusion of the paper (and future work)
 - [x] Fix ToC of result file
-- [] Compare plot results of different analysis / diversity threshold approaches
-    1. Include all by default
-    2. Exclude both cases where one has not reached the threshold completly
-    3. Exclude both cases where one has not reached the threshold at the threshold
-    4. Exclude cases where one has not reached the threshold just for the operator
+- [x] Compare plot results of different analysis / diversity threshold approaches
 - [] Finish writing the conclusion
 - [] Think about title of the paper
 - [] Format paper and improve language

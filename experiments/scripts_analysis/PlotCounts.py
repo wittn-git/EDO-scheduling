@@ -3,8 +3,9 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def plot_counts(input_file_count, output_folder, file_extension):
+def plot_counts(input_file_count, output_folder_plots, output_folder_stats, file_extension):
 
+    statistics_files = os.path.join(output_folder_stats, f"counts_statistics.txt")
     df = pd.read_csv(input_file_count)
     column_combinations = [
         ["mu"], ["n"], ["m"], ["alpha"], ["mutation_operator"]
@@ -38,11 +39,14 @@ def plot_counts(input_file_count, output_folder, file_extension):
     overall_X = []
     for diversity_threshold in diversity_thresholds:
         df_thresh = df[(df["diversity_threshold"] == diversity_threshold)]
-        eucl_sup, sum_sup = df_thresh[(df_thresh["superior_op"] == "eucl")].shape[0], df_thresh[(df["superior_op"] == "sum")].shape[0]
+        eucl_sup = df_thresh[df_thresh["superior_op"] == "eucl"].shape[0]
+        sum_sup = df_thresh[df_thresh["superior_op"] == "sum"].shape[0]
         instances_n = df_thresh.shape[0]
         overall_X.append((eucl_sup-sum_sup) / instances_n)
     axes[0].plot(diversity_thresholds, overall_X, linestyle=line_styles[0], color="black")
     X_values.extend(overall_X)
+    with open(statistics_files, "w") as f:
+        f.write(f"Overall: {[round(x, 4) for x in overall_X]}\n")
 
     for index, column_combination in enumerate(column_combinations):
         
@@ -59,9 +63,12 @@ def plot_counts(input_file_count, output_folder, file_extension):
             X = []
             for diversity_threshold in diversity_thresholds:
                 df_thresh = df_value[(df_value["diversity_threshold"] == diversity_threshold)]
-                eucl_sup, sum_sup = df_thresh[(df_thresh["superior_op"] == "eucl")].shape[0], df_thresh[(df["superior_op"] == "sum")].shape[0]
+                eucl_sup = df_thresh[df_thresh["superior_op"] == "eucl"].shape[0]
+                sum_sup = df_thresh[df_thresh["superior_op"] == "sum"].shape[0]
                 instances_n = df_thresh.shape[0]
-                X.append((eucl_sup-sum_sup)/instances_n)    
+                X.append((eucl_sup-sum_sup)/instances_n) 
+            with open(statistics_files, "a") as f:   
+                f.write(f"{title}: {value_row} -> {[round(x, 4) for x in X]}\n")
             X_values.extend(X)
             label = str(value_row).replace("[", "").replace("]", "").replace("'", "")  
             label = value_mapping[label] if label in value_mapping else label
@@ -82,17 +89,17 @@ def plot_counts(input_file_count, output_folder, file_extension):
         min_val, max_val = min(X_values)*1.1, max(X_values)*1.1
         ax.set_ylim([min_val, max_val])
     
-    output_file = os.path.join(output_folder, f"countplot.{file_extension}")
+    output_file = os.path.join(output_folder_plots, f"countplot.{file_extension}")
     fig.savefig(output_file, bbox_inches='tight')
 
 if __name__ == "__main__" :
 
-    if len(sys.argv) < 4:
-        print("Usage: python3 PlotCounts.py <input_file_count> <output_folder> <file_extension>")
+    if len(sys.argv) < 5:
+        print("Usage: python3 PlotCounts.py <input_file_count> <output_folder_plots> <output_folder_stats> <file_extension>")
         exit(1)
     
     input_file_count = sys.argv[1]
-    output_folder = sys.argv[2]
-    file_extension = sys.argv[3]
+    output_folder_plots, output_folder_stats = sys.argv[2], sys.argv[3]
+    file_extension = sys.argv[4]
 
-    plot_counts(input_file_count, output_folder, file_extension)
+    plot_counts(input_file_count, output_folder_plots, output_folder_stats, file_extension)
