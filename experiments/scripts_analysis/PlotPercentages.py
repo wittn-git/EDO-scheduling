@@ -16,14 +16,20 @@ def plot_percentages(input_file_count, output_folder_plots, output_folder_stats,
     line_styles = ["-", "--"]
     diversity_thresholds = df["diversity_threshold"].unique()
 
+    eucl, sum = [], []
     for i, op in enumerate(["eucl", "sum"]):
         X = []
         for div_thresh in diversity_thresholds:
             df_thresh = df[df["diversity_threshold"] == div_thresh]
             X.append(df_thresh[f"{op}_improvement"].mean()*100)
         plt.plot(diversity_thresholds, X, label=op_mapping[op], linestyle=line_styles[i], color='black', linewidth=2)
+        if op == "eucl": eucl = X
+        else: sum = X
         with open(statistics_file, "a") as f:
             f.write(f"{op}: {[round(x, 4) for x in X]}\n")
+
+    with open(statistics_file, "a") as f:
+        f.write(f"difference: {[round(sum[i] - eucl[i], 4) for i in range(len(eucl))]}\n")
 
     plt.xlabel("Diversity")
     plt.ylabel("Improvement (%)")
