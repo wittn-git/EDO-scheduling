@@ -99,8 +99,9 @@ A pdf of the experimental results can be found in the main folder of the reposit
 - [x] Compare plot results of different analysis / diversity threshold approaches
 - [x] Finish writing the conclusion
 - [x] Think about title of the paper
-- [] Improve language
+- [x] Improve language
 - [] Give paper to proofreading
 - [] Include suggestions 
 - [] Format paper 
+- [] Read paper a final time and then send it in
 - [] Remove TODO list from README.md
