@@ -16,7 +16,7 @@ def plot_generations(input_file_count, output_folder, file_extension):
         "mutation_operator": "Mutation Operator"
     }
     plt.rcParams.update({'font.size': 22})
-    fig, axes = plt.subplots(ncols=4, nrows=1, figsize=(32, 8))
+    fig, axes = plt.subplots(ncols=4, nrows=1, figsize=(24, 6))
     axes = axes.flatten()
 
     for index, column_combination in enumerate(column_combinations):
