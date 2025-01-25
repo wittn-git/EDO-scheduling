@@ -26,7 +26,7 @@ def generate_plot(output_file, mu, max_sim, p):
     Y_balanced = [div_fun(get_balanced_vector(vec_size, max_sim, count)) for count in X]
     Y_unbalanced = [div_fun(get_unbalanced_vector(vec_size, max_sim, count)) for count in X]
 
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(16, 8))
     plt.rcParams.update({'font.size': 22})
     plt.plot(X, Y_balanced, label="$\\mathcal{D}$ maximing b", linestyle="--", color='black', linewidth=2)
     plt.plot(X, Y_unbalanced, label="$\\mathcal{D}$ minimizing b", linestyle="-", color='black', linewidth=2)

@@ -16,7 +16,7 @@ def plot_generations(input_file_count, output_folder, file_extension):
         "mutation_operator": "Mutation Operator"
     }
     plt.rcParams.update({'font.size': 22})
-    fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(15, 10))
+    fig, axes = plt.subplots(ncols=4, nrows=1, figsize=(32, 8))
     axes = axes.flatten()
 
     for index, column_combination in enumerate(column_combinations):
@@ -55,7 +55,7 @@ def plot_generations(input_file_count, output_folder, file_extension):
         ax.set_xticks(xticks)
         ax.set_xticklabels(xtick_labels, ha="center")
 
-        if index % 2 == 0: 
+        if index == 0: 
             ax.set_ylabel("Generation Ratio")
         else:
             ax.set_yticks([])
@@ -65,7 +65,7 @@ def plot_generations(input_file_count, output_folder, file_extension):
         Patch(facecolor="white", hatch="", label=r'$||\cdot||_2$', edgecolor="black"),
         Patch(facecolor="white", hatch="//", label=r'$\sum \cdot$', edgecolor="black")        
     ]
-    fig.legend(handles=legend_elements, loc="lower center", ncol=2, bbox_to_anchor=(0.5, -0.05))
+    fig.legend(handles=legend_elements, loc="lower center", ncol=2, bbox_to_anchor=(0.5, -0.1))
 
     output_file = os.path.join(output_folder, f"generationplot.{file_extension}")
     fig.tight_layout(rect=[0, 0, 1, 0.95])  # Adjust layout to make space for the legend

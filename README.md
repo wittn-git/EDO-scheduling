@@ -100,7 +100,7 @@ A pdf of the experimental results can be found in the main folder of the reposit
 - [x] Finish writing the conclusion
 - [x] Think about title of the paper
 - [x] Improve language
-- [] Give paper to proofreading
+- [x] Give paper to proofreading
 - [] Include suggestions 
 - [] Format paper 
 - [] Read paper a final time and then send it in
