@@ -78,7 +78,7 @@ def compile(output_file, include_plots, input_folder_plots, include_numerical, i
                 "percentageplot.svg": "Improvement of robustness from initial robustness to robustness at the respective diversity threshold over all instances of both methods to summarize the vector of similarities.",
                 "percentageplot_sixfold.svg": "Improvement of robustness from initial robustness to robustness at the respective diversity threshold over all instances of using $\\lVert \\cdot \\rVert_2$ to summarize the vector of similarities, for each parameter group."
             }
-            plot_files = sorted([plot_file for plot_file in os.listdir(input_folder_plots) if plot_file.endswith(".svg")])
+            plot_files = ["clusterexample.svg", "percentageplot.svg", "percentageplot_sixfold.svg", "generationplot.svg", "countplot.svg",]
             for plot_file in plot_files:
                 f.write(f"\\begin{{figure}}[H]\n\\centering\n")
                 f.write(f"\\includesvg[width=0.7\\textwidth]{{{input_folder_plots + "/" + plot_file}}} \\caption{{{description_map[plot_file]}}}\n")

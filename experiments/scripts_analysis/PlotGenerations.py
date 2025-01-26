@@ -15,7 +15,8 @@ def plot_generations(input_file_count, output_folder, file_extension):
         "alpha": "Quality Parameter", 
         "mutation_operator": "Mutation Operator"
     }
-    plt.rcParams.update({'font.size': 22})
+    
+    plt.rcParams.update({'font.size': 26})
     fig, axes = plt.subplots(ncols=4, nrows=1, figsize=(24, 6))
     axes = axes.flatten()
 

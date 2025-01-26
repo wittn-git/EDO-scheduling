@@ -101,7 +101,7 @@ A pdf of the experimental results can be found in the main folder of the reposit
 - [x] Think about title of the paper
 - [x] Improve language
 - [x] Give paper to proofreading
-- [] Include suggestions 
-- [] Format paper 
+- [x] Include suggestions 
+- [x] Format paper 
 - [] Read paper a final time and then send it in
 - [] Remove TODO list from README.md

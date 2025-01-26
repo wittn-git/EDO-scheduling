@@ -12,7 +12,7 @@ def plot_percentages(input_file_count, output_folder_plots, output_folder_stats,
         f.write("")
 
     plt.figure(figsize=(16, 8))
-    plt.rcParams.update({'font.size': 22})
+    plt.rcParams.update({'font.size': 32})
     line_styles = ["-", "--"]
     diversity_thresholds = df["diversity_threshold"].unique()
 

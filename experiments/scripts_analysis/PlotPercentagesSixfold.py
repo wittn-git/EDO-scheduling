@@ -33,7 +33,7 @@ def plot_percentages(input_file_count, output_folder_plots, output_folder_stats,
     plt.rcParams.update({'font.size': 22})
     X_values = []
     plt.tight_layout()
-    fig, axes = plt.subplots(ncols=3, nrows=2, figsize=(24, 16))
+    fig, axes = plt.subplots(ncols=3, nrows=2, figsize=(24, 14))
     fig.subplots_adjust(hspace=0.1)
     axes = axes.flatten()
     axes[0].set_title("Overall")
