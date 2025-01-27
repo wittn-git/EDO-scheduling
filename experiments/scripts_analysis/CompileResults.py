@@ -10,12 +10,12 @@ def get_preamble(data_packages_file):
     s = "\\documentclass{article} \n \\usepackage[margin=2cm]{geometry} \n \\usepackage[inkscapearea=page,inkscapeversion=1.2.2]{svg} \n"
     s += f"\\input{{{data_packages_file}}}"
     return s + '''
-                \\newcommand{\\runningtitle}{Evolutionary Diversity Optimization for Parallel Machine Scheduling}
+                \\newcommand{\\runningtitle}{Cluster Prevention in Evolutionary Diversity Optimization for Parallel Machine Scheduling}
                 \\newcommand{\\runningauthors}{D. Wittner and Jakob Bossek}
 
                 \\begin{document}
 
-                \\title{\\textbf{Evolutionary Diversity Optimization} \\\\ \\textbf{for Parallel Machine Scheduling} \\\\ \\vspace{0.8em} \\Large Experimental Results}
+                \\title{\\textbf{Cluster Prevention in Evolutionary Diversity Optimization} \\\\ \\textbf{for Parallel Machine Scheduling} \\\\ \\vspace{0.8em} \\Large Experimental Results}
 
                 \\author{Dominic Wittner\\inst{1}\\orcidID{0009-0008-1290-9541} and Jakob Bossek\\inst{2}\\orcidID{0000-0002-4121-4668}}
                 \\institute{
