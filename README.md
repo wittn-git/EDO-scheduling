@@ -1,8 +1,8 @@
-# PPSN2024-EDO-scheduling
+# EDO-scheduling
 
 This repository was created for the bachelor thesis of Dominic Wittner with the topic "Evolutionary Diversity Optimization for Machine Scheduling", supervised by Dr. Jakob Bossek (RWTH Chair for AI Methodology).
 
-It now serves as the source code reference and experimental data reference for the paper "Evolutionary Diversity Optimization for Parallel Machine Scheduling" by Dominic Wittner and Jakob Bossek.
+It now serves as the source code reference and experimental data reference for the paper "Cluster Prevention in Evolutionary Diversity Optimization for Parallel Machine Scheduling" by Dominic Wittner and Jakob Bossek.
 
 ## Content of the repository
 
@@ -44,64 +44,3 @@ In addition, the python packages specified in "experiments/scripts_analysis/requ
 
 ## Result File
 A pdf of the experimental results can be found in the main folder of the repository. The file is named "result_file.pdf".
-
-## TODO (Revision of paper)
-
-- [x] Add the robustness experiments
-- [x] Revise the summary of the experiments
-- [x] Revise the experiment running code
-- [x] Revise the table generation
-- [x] Alter DFM definition
-- [x] Set table format
-- [x] Change proof to: normalized, length optimized
-- [x] Add stepwise diversity dependent logging in experiments
-- [x] Do preliminary tests for the lambdas of XRAI
-- [x] Check if proof is possible for general metrics
-- [x] Change paper structure in overleaf
-- [x] Consider sorting as alternative method for Euclidean Norm
-- [x] Check performance of alternative method
-- [x] Write the README.md
-- [x] Update the table generation utility
-- [x] Alter problem generation by including machine capacities
-- [x] Modify seed generation
-- [x] Finish table compile utility
-- [x] Find a way to compute the ordering method for larger instances
-- [x] Run the experiments
-- [x] Write utility to make a trajectory plot for a single parameter set
-- [x] Write utility to get a numerical analysis of the results
-- [x] Add the plots to the result file
-- [x] Numerical analysis: Superiority of operators
-- [x] Numerical analysis: Improvement of operators
-- [x] Numerical analysis: Overall superiority of operators
-- [x] Write count runs
-- [x] Write tablerization of count runs in numerical analysis
-- [x] Add numerical analysis to the result file
-- [x] Fix error in calculation of starting robustness
-- [x] Rerun tests
-- [x] Think about changes in the experiment parameters: more combinations, changes restriction of parameters
-- [x] Run experiments without max div restrictions
-- [x] Write plot counts utility
-- [x] Execute full summary
-- [x] Write generation plot util
-- [x] Result file: count tables
-- [x] Implementation of result file compilation
-- [x] Clean up the repo
-- [x] Compile the result file
-- [x] Clean Latex Document
-- [x] Check for parameter restrictions
-- [x] Implement, check, move and write to file: diversity changes in results
-- [x] Make a sixfold percentage plot
-- [x] Include missing related work
-- [x] Clean up sources
-- [x] Write draft of result section
-- [x] Write draft of conclusion of the paper (and future work)
-- [x] Fix ToC of result file
-- [x] Compare plot results of different analysis / diversity threshold approaches
-- [x] Finish writing the conclusion
-- [x] Think about title of the paper
-- [x] Improve language
-- [x] Give paper to proofreading
-- [x] Include suggestions 
-- [x] Format paper 
-- [] Read paper a final time and then send it in
-- [] Remove TODO list from README.md
