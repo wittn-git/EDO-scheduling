@@ -6,11 +6,11 @@ It now serves as the source code reference and experimental data reference for t
 
 ## Content of the repository
 
-This repository is mainly divided int two parts. 
+This repository is mainly divided into two parts. 
 
 The folder "src" contains the C++ source code for the implementation of the used evolutionary algorithm (a class for the population, functions for the used evolutionary operators, a function to run the (µ+1)-EA for a parameter set and a testing function, executing the algorithm for given parameter sets and documenting the results).
 
-The folder experiments is divided in three folders. The "data" folder contains all results of the experiments in csv format. The "scripts_analysis" folder contains the python scripts used to summarize and analyze the results as well as scripts for the generation of tables and plots. The "scripts_execution" folder contains bash scripts to run the experiments with the parameter sets in the paper as well as to run the analysis scripts.
+The folder "experiments" is divided in three folders. The "data" folder contains all results of the experiments in csv format. The "scripts_analysis" folder contains the python scripts used to summarize and analyze the results as well as scripts for the generation of tables and plots. The "scripts_execution" folder contains bash scripts to run the experiments with the parameter sets in the paper as well as to run the analysis scripts.
 
 To execute the experiments with the parameter combinations presented in the paper, one simply has to navigate to "experiments/scripts_execution" and execute the bash script "run_experiments.sh". The results will be stored in the "data/runs" folder. Using the bash script "summarize_results.sh" the results will be concatenated and aggregated in the "data" folder.
 
