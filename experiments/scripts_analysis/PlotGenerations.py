@@ -20,6 +20,8 @@ def plot_generations(input_file_count, output_folder, file_extension):
     fig, axes = plt.subplots(ncols=4, nrows=1, figsize=(24, 6))
     axes = axes.flatten()
 
+    averages = {div_op: [] for div_op in df["diversity_operator"].unique()}
+
     for index, column_combination in enumerate(column_combinations):
         ax = axes[index]
         title = ", ".join([column_combination_mapping[col] for col in column_combination])
@@ -39,6 +41,7 @@ def plot_generations(input_file_count, output_folder, file_extension):
             for j, div_op in enumerate(df_value["diversity_operator"].unique()):
                 df_div_op = df_value[df_value["diversity_operator"] == div_op]
                 hatch = "" if div_op == "eucl" else "//"
+                averages[div_op].append(float(df_div_op["generation_ratio"].mean()))
                 ax.boxplot(
                     df_div_op["generation_ratio"], 
                     positions=[pos_start + j * 0.5], 
@@ -60,6 +63,13 @@ def plot_generations(input_file_count, output_folder, file_extension):
             ax.set_ylabel("Generation Ratio")
         else:
             ax.set_yticks([])
+    
+    relative_sum_improvements = []
+    for index, _ in enumerate(averages["eucl"]):
+        relative_sum_improvements.append(
+            (averages["eucl"][index] - averages["sum"][index]) / averages["eucl"][index]
+        )
+    print("Average relative sum improvement:", sum(relative_sum_improvements) / len(relative_sum_improvements))
 
     # Add a legend for all subplots
     legend_elements = [
