@@ -24,7 +24,7 @@ If one wishes to execute the experiments with different parameter sets, one can 
     - ns: n_1,n_2,...,n_x (ints)                    [numbers of jobs]
     - ms: m_1,m_2,...m_y (ints)                     [numbers of machines]
     - alphas: a_1,a_2,...,a_z (doubles)             [quality parameters]
-    - lambda: double ("-" if unused")               [mean of the poisson distribution for "XRAI"]
+    - lambda: double ("-" if unused)               [mean of the poisson distribution for "XRAI"]
 
 They can also be passed directly to the executable, after the code in the "src" folder is complied using CMake.
 
